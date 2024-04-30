@@ -1,7 +1,6 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/services/get_fav_book_services.dart';
 import 'package:bookstore/models/fav_books_model.dart';
-import 'package:bookstore/widgets/card_of_cart_user_books.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
 

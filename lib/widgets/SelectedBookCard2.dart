@@ -15,7 +15,8 @@ class SelectedBookCard2 extends StatelessWidget {
       required this.category,
       required this.autherName,
       required this.description,
-      required this.bookid});
+      required this.bookid,
+      required this.rating});
 
   final String autherName;
   final String bookid;
@@ -24,6 +25,7 @@ class SelectedBookCard2 extends StatelessWidget {
   final String image;
   final String price;
   final String title;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +103,8 @@ class SelectedBookCard2 extends StatelessWidget {
                         SizedBox(
                           height: hight * 0.01,
                         ),
-                        const RatingBarWidget(
+                        RatingBarWidget(
+                          rating: rating,
                           size: 45,
                         ),
                         SizedBox(
