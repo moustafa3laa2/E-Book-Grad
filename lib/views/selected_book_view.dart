@@ -1,4 +1,6 @@
 import 'package:bookstore/cubits/get_books/book_id/get_books_cubit.dart';
+import 'package:bookstore/helper/api.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/widgets/SelectedBookCard2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -6,10 +8,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SelectedBookView extends StatefulWidget {
   const SelectedBookView({
-    super.key,
+    Key? key,
     required this.bookid,
     required this.title,
-  });
+  }) : super(key: key);
   final String bookid;
   final String title;
 
@@ -18,6 +20,7 @@ class SelectedBookView extends StatefulWidget {
 }
 
 class _SelectedBookViewState extends State<SelectedBookView> {
+  bool isFav = false;
   @override
   void initState() {
     super.initState();
@@ -37,25 +40,45 @@ class _SelectedBookViewState extends State<SelectedBookView> {
             size: 32,
           ),
         ),
-        // title: Text(
-        //   widget.title,
-        //style: TextStyle(
-        //fontWeight: FontWeight.w600,
-        //fontSize: getResponsiveFontSize(context, fontSize: 24),
-        //color: const Color(0xFF121212)),
-        //),
         centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 12),
-            child: IconButton(
-              icon: const Icon(
-                FontAwesomeIcons.heart,
-                size: 24,
-              ),
-              onPressed: () {},
+            child: BlocBuilder<GetBookidCubit, GeBooksidtate>(
+              builder: (context, state) {
+                // Inside BlocBuilder, access the book ID
+                if (state is GetBookidSuccess && state.books.book != null) {
+                  return IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.heart,
+                      color: isFav ? Colors.red : Colors.black,
+                      size: 24,
+                    ),
+                    onPressed: () async {
+                      setState(() {
+                        isFav = !isFav;
+                      });
+                      if (isFav) {
+                        final response = await Api().post(
+                          token: CacheNetwork.getCacheData(key: 'token'),
+                          url:
+                              'https://book-store-api-mu.vercel.app/User/Favorites/${state.books.book!.id!}',
+                        );
+                      } else {
+                        final response = await Api().delete(
+                          url:
+                              'https://book-store-api-mu.vercel.app/User/Favorites/${state.books.book!.id!}',
+                          token: CacheNetwork.getCacheData(key: 'token'),
+                        );
+                      }
+                    },
+                  );
+                }
+                // Return an empty container if state is not GetBookidSuccess or book is null
+                return Container();
+              },
             ),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(

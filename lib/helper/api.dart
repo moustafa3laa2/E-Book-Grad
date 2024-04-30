@@ -38,4 +38,19 @@ class Api {
           'there is a problem with status code ${response.statusCode} with body ${jsonDecode(response.body)}');
     }
   }
+
+  Future<void> delete({required String url, @required String? token}) async {
+    Map<String, String> headers = {};
+    if (token != null) {
+      headers.addAll({'Authorization': 'Bearer $token'});
+    }
+    http.Response response =
+        await http.delete(Uri.parse(url), headers: headers);
+
+    if (response.statusCode == 200) {
+      print('Deleted successfully');
+    } else {
+      print('Failed to delete data. Error code: ${response.statusCode}');
+    }
+  }
 }

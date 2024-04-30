@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => kToken != null && kToken != ""
+            builder: (context) => kToken == null && kToken == ""
                 ? const UserNavigationBar()
                 : const Signin(),
           ),
