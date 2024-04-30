@@ -68,6 +68,7 @@ class _CartState extends State<Cart> {
                             author: books[index]['author'],
                             price: books[index]['price'],
                             type: books[index]['type'],
+                            bookid: '10',
                           ),
                         ),
                       ),

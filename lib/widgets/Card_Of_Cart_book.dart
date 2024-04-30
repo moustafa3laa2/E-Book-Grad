@@ -1,4 +1,6 @@
 import 'package:bookstore/constants.dart';
+import 'package:bookstore/helper/api.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:flutter/material.dart';
 
 class CardOfCartBook extends StatelessWidget {
@@ -8,12 +10,14 @@ class CardOfCartBook extends StatelessWidget {
       required this.title,
       required this.author,
       required this.price,
-      required this.type});
+      required this.type,
+      required this.bookid});
   final String image;
   final String title;
   final String author;
   final String price;
   final String type;
+  final String bookid;
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +84,13 @@ class CardOfCartBook extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    final response = await Api().delete(
+                      url:
+                          'https://book-store-api-mu.vercel.app/User/Bookmarks/$bookid',
+                      token: CacheNetwork.getCacheData(key: 'token'),
+                    );
+                  },
                   icon: const Icon(
                     Icons.close,
                     color: Colors.white,

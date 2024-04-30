@@ -1,11 +1,13 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/cart.dart';
 import 'package:bookstore/views/categories_view.dart';
 import 'package:bookstore/views/chat_view.dart';
 import 'package:bookstore/views/home_view.dart';
 import 'package:bookstore/views/search_screen.dart';
 import 'package:bookstore/views/settings_view.dart';
+import 'package:bookstore/views/signin-up/sign_in_view.dart';
 import 'package:bookstore/widgets/user_favourite_book.dart';
 import 'package:bookstore/widgets/user_owns_books.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
@@ -76,7 +78,13 @@ class UserNavigationBar extends StatelessWidget {
             ListTile(
                 title: const Text('Log out'),
                 leading: const Icon(Icons.logout, color: Colors.black),
-                onTap: () {}),
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const Signin()),
+                  );
+                  CacheNetwork.deleteCacheItem(key: 'token');
+                }),
           ],
         ),
       ),

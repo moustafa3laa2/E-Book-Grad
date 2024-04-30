@@ -1,6 +1,5 @@
 import 'package:bloc/bloc.dart';
 import 'package:bookstore/constants.dart';
-import 'package:bookstore/core/services/get_fav_book_services.dart';
 import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/models/sign_in_model.dart';
@@ -52,10 +51,6 @@ class UserCubit extends Cubit<UserState> {
       emit(
         SignInSuccess(signInModel: signInModel),
       );
-      print(
-        'token is ${CacheNetwork.getCacheData(key: 'token')}',
-      );
-      print(GetFavBooksServices().getFavBooks());
     } catch (e) {
       emit(SignInFailure(errMessage: e.toString()));
     }

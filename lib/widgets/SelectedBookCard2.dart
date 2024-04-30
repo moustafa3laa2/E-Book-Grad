@@ -1,4 +1,6 @@
 import 'package:bookstore/constants.dart';
+import 'package:bookstore/helper/api.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/widgets/add_comment_for_rating.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/description_book.dart';
@@ -150,7 +152,14 @@ class SelectedBookCard2 extends StatelessWidget {
                               child: CustomButton(
                                 color: Colors.black,
                                 title: 'Add to Cart',
-                                onTap: () {},
+                                onTap: () async {
+                                  final response = await Api().post(
+                                    token:
+                                        CacheNetwork.getCacheData(key: 'token'),
+                                    url:
+                                        'https://book-store-api-mu.vercel.app/User/Bookmarks/$bookid',
+                                  );
+                                },
                               ),
                             )
                           ],
