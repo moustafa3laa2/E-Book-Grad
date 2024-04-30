@@ -1,3 +1,4 @@
+import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:bookstore/views/cart.dart';
 import 'package:bookstore/views/categories_view.dart';
@@ -8,6 +9,7 @@ import 'package:bookstore/views/settings_view.dart';
 import 'package:bookstore/widgets/user_favourite_book.dart';
 import 'package:bookstore/widgets/user_owns_books.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -123,6 +125,9 @@ class UserNavigationBar extends StatelessWidget {
         builder: (context, state) {
           if (state is BottomNavigationBarInitial ||
               state is BottomNavigationBarHome) {
+            if (kDebugMode) {
+              print(' token : $kToken');
+            }
             return const HomeView();
           } else if (state is BottomNavigationBarCategory) {
             return const CategoriesView();

@@ -34,6 +34,7 @@ class _SelectedBookViewState extends State<SelectedBookView> {
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
+            Navigator.pushReplacementNamed(context, '/last_page_route');
           },
           icon: const Icon(
             Icons.arrow_back,

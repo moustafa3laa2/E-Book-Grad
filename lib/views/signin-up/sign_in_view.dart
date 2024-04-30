@@ -124,7 +124,10 @@ class _SigninState extends State<Signin> {
                     ),
                     const SizedBox(height: 30),
                     state is SignInLoading
-                        ? const Center(child: CircularProgressIndicator())
+                        ? const Center(
+                            child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ))
                         : CustomButton(
                             color: Colors.black,
                             title: 'Get Started',

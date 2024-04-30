@@ -163,7 +163,9 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(height: 20),
                   state is SignUpLoading
                       ? const Center(
-                          child: CircularProgressIndicator(),
+                          child: CircularProgressIndicator(
+                            color: Colors.black,
+                          ),
                         )
                       : CustomButton(
                           color: Colors.black,

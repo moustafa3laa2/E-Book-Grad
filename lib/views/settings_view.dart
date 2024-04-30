@@ -30,7 +30,9 @@ class SettingsView extends StatelessWidget {
           ),
           body: state is SignInLoading
               ? const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(
+                    color: Colors.black,
+                  ),
                 )
               : state is SignInSuccess
                   ? SingleChildScrollView(
