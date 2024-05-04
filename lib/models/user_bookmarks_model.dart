@@ -1,27 +1,27 @@
-class Books {
-  List<Book>? book;
+class UserBookmarks {
+  List<Bookmarks>? bookmarks;
 
-  Books({this.book});
+  UserBookmarks({this.bookmarks});
 
-  Books.fromJson(Map<String, dynamic> json) {
-    if (json['book'] != null) {
-      book = <Book>[];
-      json['book'].forEach((v) {
-        book!.add(new Book.fromJson(v));
+  UserBookmarks.fromJson(Map<String, dynamic> json) {
+    if (json['bookmarks'] != null) {
+      bookmarks = <Bookmarks>[];
+      json['bookmarks'].forEach((v) {
+        bookmarks!.add(new Bookmarks.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.book != null) {
-      data['book'] = this.book!.map((v) => v.toJson()).toList();
+    if (this.bookmarks != null) {
+      data['bookmarks'] = this.bookmarks!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Book {
+class Bookmarks {
   Image? image;
   Image? pdf;
   String? sId;
@@ -39,9 +39,8 @@ class Book {
   var iV;
   var averageRating;
   bool? newarrival;
-  var saleprice;
 
-  Book(
+  Bookmarks(
       {this.image,
       this.pdf,
       this.sId,
@@ -58,10 +57,9 @@ class Book {
       this.upcoming,
       this.iV,
       this.averageRating,
-      this.newarrival,
-      this.saleprice});
+      this.newarrival});
 
-  Book.fromJson(Map<String, dynamic> json) {
+  Bookmarks.fromJson(Map<String, dynamic> json) {
     image = json['image'] != null ? new Image.fromJson(json['image']) : null;
     pdf = json['pdf'] != null ? new Image.fromJson(json['pdf']) : null;
     sId = json['_id'];
@@ -79,7 +77,6 @@ class Book {
     iV = json['__v'];
     averageRating = json['averageRating'];
     newarrival = json['newarrival'];
-    saleprice = json['saleprice'];
   }
 
   Map<String, dynamic> toJson() {
@@ -105,7 +102,6 @@ class Book {
     data['__v'] = this.iV;
     data['averageRating'] = this.averageRating;
     data['newarrival'] = this.newarrival;
-    data['saleprice'] = this.saleprice;
     return data;
   }
 }

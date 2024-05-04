@@ -11,7 +11,6 @@ class CategoriesView extends StatelessWidget {
     'Classics',
     'Mystery',
     'Crime',
-    'Mystery',
     'Fiction',
   ];
   @override

@@ -9,6 +9,7 @@ import 'package:bookstore/cubits/get_books/get_newarrival_books/get_books_cubit.
 import 'package:bookstore/cubits/get_books/get_onsale_books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/get_topseller%20-books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/get_upcoming_books/get_books_cubit.dart';
+import 'package:bookstore/cubits/get_books/get_user_Bookmarks_books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/get_user_fav_books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
@@ -74,6 +75,9 @@ class BookStore extends StatelessWidget {
         ),
         BlocProvider<GetownBooksCubit>(
           create: (BuildContext context) => GetownBooksCubit(),
+        ),
+        BlocProvider<GetmarksBooksCubit>(
+          create: (BuildContext context) => GetmarksBooksCubit(),
         ),
       ],
       child: MaterialApp(

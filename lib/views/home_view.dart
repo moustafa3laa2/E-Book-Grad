@@ -35,9 +35,6 @@ class HomeView extends StatelessWidget {
                 height: 56,
               ),
               BestDealsSection(),
-              SizedBox(
-                height: 56,
-              ),
               TopBookCardListView(),
               SizedBox(
                 height: 56,

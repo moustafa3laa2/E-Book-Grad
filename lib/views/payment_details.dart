@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/utils/api_key.dart';
 import 'package:bookstore/cubits/stripe/stripe_payment_cubit.dart';
 import 'package:bookstore/models/amount_model/amount_model.dart';
@@ -16,10 +18,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:flutter_paypal_payment/flutter_paypal_payment.dart';
+import 'package:http/http.dart' as http;
 
 class PaymentDeteils extends StatefulWidget {
-  const PaymentDeteils({super.key});
-
+  const PaymentDeteils({super.key, required this.prise, required this.bookIds});
+  final int prise;
+  final List<String> bookIds;
   @override
   State<PaymentDeteils> createState() => _PaymentDeteilsState();
 }
@@ -28,6 +32,46 @@ int selectedPayment = 0;
 bool isselected = false;
 
 class _PaymentDeteilsState extends State<PaymentDeteils> {
+  Future<void> postBookData(List<String> bookIds) async {
+    String apiUrl = 'https://book-store-api-mu.vercel.app/User/Books';
+
+    Map<String, dynamic> body = {
+      "bookids": bookIds,
+    };
+
+    String encodedBody = json.encode(body);
+
+    http.Response response = await http.post(
+      Uri.parse(apiUrl),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer $kToken',
+      },
+      body: encodedBody,
+    );
+
+    if (response.statusCode == 200) {
+      if (kDebugMode) {
+        print("Post successful!");
+        print("Response: ${response.body}");
+      }
+
+      Navigator.pushReplacement<void, void>(
+        context,
+        MaterialPageRoute<void>(
+          builder: (BuildContext context) => PaymentSuccess(
+            price: widget.prise.toString(),
+          ),
+        ),
+      );
+    } else {
+      if (kDebugMode) {
+        print("Failed to post. Status code: ${response.statusCode}");
+        print("Response: ${response.body}");
+      }
+    }
+  }
+
   final GlobalKey<FormState> formKey = GlobalKey();
 
   @override
@@ -81,12 +125,8 @@ class _PaymentDeteilsState extends State<PaymentDeteils> {
               BlocConsumer<StripePaymentCubit, StripePaymentState>(
                 listener: (context, state) {
                   if (state is StripePaymenSuccess) {
-                    Navigator.pushReplacement<void, void>(
-                      context,
-                      MaterialPageRoute<void>(
-                        builder: (BuildContext context) =>
-                            const PaymentSuccess(),
-                      ),
+                    postBookData(
+                      widget.bookIds,
                     );
                   }
                   if (state is StripePaymentFailure) {
@@ -109,7 +149,7 @@ class _PaymentDeteilsState extends State<PaymentDeteils> {
                         if (selectedPayment == 0) {
                           PaymentIntentInputModel paymentIntentInputModel =
                               PaymentIntentInputModel(
-                                  amount: '500',
+                                  amount: widget.prise.toString(),
                                   currency: 'USD',
                                   customerId: 'cus_Pla7xlkvyee0gd');
                           BlocProvider.of<StripePaymentCubit>(context)
@@ -118,23 +158,18 @@ class _PaymentDeteilsState extends State<PaymentDeteils> {
                                       paymentIntentInputModel);
                         } else if (selectedPayment == 1) {
                           var amount = AmountModel(
-                              total: "500",
+                              total: widget.prise.toString(),
                               currency: "USD",
                               details: Details(
-                                  subtotal: "500",
+                                  subtotal: widget.prise.toString(),
                                   shipping: "0",
                                   shippingDiscount: 0));
                           List<OrderItemModel> orders = [
                             OrderItemModel(
                                 name: "Book1",
                                 quantity: 1,
-                                price: "250",
+                                price: widget.prise.toString(),
                                 currency: "USD"),
-                            OrderItemModel(
-                                name: "Book2",
-                                quantity: 1,
-                                price: "250",
-                                currency: "USD")
                           ];
                           var itemList = ItemListModel(orders: orders);
                           exceutePaypalPayment(context, amount, itemList);
@@ -179,11 +214,14 @@ class _PaymentDeteilsState extends State<PaymentDeteils> {
         ],
         note: "Contact us for any questions on your order.",
         onSuccess: (Map params) async {
+          postBookData(widget.bookIds);
           log("onSuccess: $params");
           Navigator.pushReplacement<void, void>(
             context,
             MaterialPageRoute<void>(
-              builder: (BuildContext context) => const PaymentSuccess(),
+              builder: (BuildContext context) => PaymentSuccess(
+                price: widget.prise.toString(),
+              ),
             ),
           );
         },

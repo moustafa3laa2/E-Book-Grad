@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PaymentSuccess extends StatelessWidget {
-  const PaymentSuccess({super.key});
+  const PaymentSuccess({super.key, required this.price});
+  final String price;
 
   @override
   Widget build(BuildContext context) {
@@ -83,17 +84,17 @@ class PaymentSuccess extends StatelessWidget {
                           color: Colors.black,
                           height: 60,
                         ),
-                        const Row(
+                        Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'Total:',
                                 style: TextStyle(
                                     fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                '\$500',
-                                style: TextStyle(
+                                '\$$price',
+                                style: const TextStyle(
                                     fontSize: 24, fontWeight: FontWeight.bold),
                               ),
                             ]),
@@ -133,7 +134,6 @@ class PaymentSuccess extends StatelessWidget {
                   )),
             ),
           ),
-
           Positioned(
             top: height * .04,
             left: width * 0,

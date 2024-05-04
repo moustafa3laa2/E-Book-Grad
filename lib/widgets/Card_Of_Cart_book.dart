@@ -34,7 +34,7 @@ class CardOfCartBook extends StatelessWidget {
           ClipRRect(
             borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(12), bottomLeft: Radius.circular(12)),
-            child: Image.asset(
+            child: Image.network(
               image,
               height: MediaQuery.of(context).size.height * (155 / 812),
             ),
@@ -98,7 +98,7 @@ class CardOfCartBook extends StatelessWidget {
               const Spacer(),
               Row(
                 children: [
-                  Text(price,
+                  Text('\$$price',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: getResponsiveFontSize(context, fontSize: 20),
