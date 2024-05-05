@@ -93,7 +93,7 @@ class _BooknewarrivalCardListViewState
                         autherName: state.books.book![index].author!,
                         description: state.books.book![index].description!,
                         bookid: state.books.book![index].sId!,
-                        rating: state.books.book![index].averageRating!,
+                        rating: state.books.book![index].averageRating!.toDouble(),
                       ),
                     );
                   }),

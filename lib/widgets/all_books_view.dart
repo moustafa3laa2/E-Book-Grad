@@ -90,7 +90,7 @@ class _AllBooksViewState extends State<AllBooksView> {
                         autherName: state.books[index].author!,
                         description: state.books[index].description!,
                         bookid: state.books[index].sId!,
-                        rating: state.books[index].averageRating!,
+                        rating: state.books[index].averageRating!.toDouble(),
                       ),
                     );
                   }),
