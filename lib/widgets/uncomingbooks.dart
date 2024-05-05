@@ -91,7 +91,7 @@ class _BookuncomingCardListViewState extends State<BookuncomingCardListView> {
                         autherName: state.books.book![index].author!,
                         description: state.books.book![index].description!,
                         bookid: state.books.book![index].sId!,
-                        rating: state.books.book![index].averageRating!,
+                        rating: 0,
                         price: '',
                       ),
                     );
