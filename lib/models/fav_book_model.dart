@@ -38,7 +38,7 @@ class Favorites {
   bool? upcoming;
   var iV;
   var saleprice;
-  double? averageRating;
+  var averageRating;
   bool? newarrival;
 
   Favorites(

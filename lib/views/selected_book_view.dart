@@ -107,7 +107,7 @@ class _SelectedBookViewState extends State<SelectedBookView> {
                       autherName: state.books.book!.author!,
                       description: state.books.book!.description!,
                       bookid: widget.bookid,
-                      rating: state.books.book!.averageRating!,
+                      rating: state.books.book!.averageRating!.toDouble(),
                     );
                   } else if (state is GetBookidFailure) {
                     return const Center(
