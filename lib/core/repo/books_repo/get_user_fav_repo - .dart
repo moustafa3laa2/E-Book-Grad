@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:bookstore/constants.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/models/fav_book_model.dart';
 
 import 'package:flutter/foundation.dart';
@@ -11,7 +10,9 @@ class GetfavoritesBooksRepo {
 
   Future<favbooks?> getfavoritesBooks() async {
     try {
-      headers.addAll({'Authorization': 'Bearer $kToken'});
+      headers.addAll({
+        'Authorization': 'Bearer ${CacheNetwork.getCacheData(key: 'token')}'
+      });
       final url =
           Uri.parse('https://book-store-api-mu.vercel.app/User/Favorites');
       if (kDebugMode) {

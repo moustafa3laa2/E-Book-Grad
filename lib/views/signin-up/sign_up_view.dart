@@ -15,7 +15,6 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
-  final formKey = GlobalKey<FormState>();
   bool _isVisible = true;
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class _SignUpState extends State<SignUp> {
             body: Padding(
           padding: const EdgeInsets.all(15),
           child: Form(
-            key: formKey,
+            key: context.read<UserCubit>().signUpFormKey,
             child: Center(
               child: ListView(
                 children: [

@@ -1,5 +1,6 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/user_cubit/user_cubit.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/signin-up/sign_up_view.dart';
 import 'package:bookstore/views/user_nav_bar_m.dart';
 import 'package:bookstore/widgets/custom_button.dart';
@@ -7,7 +8,6 @@ import 'package:bookstore/widgets/custom_text_form_field.dart';
 import 'package:bookstore/widgets/top_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Signin extends StatefulWidget {
   const Signin({super.key});
@@ -28,6 +28,7 @@ class _SigninState extends State<Signin> {
     return BlocConsumer<UserCubit, UserState>(
       listener: (context, state) {
         if (state is SignInSuccess) {
+          print('tokennn isss :${CacheNetwork.getCacheData(key: 'token')}');
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               content: Text('Success'),
@@ -108,20 +109,6 @@ class _SigninState extends State<Signin> {
                       onSaved: (value) {},
                     ),
                     const SizedBox(height: 30),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(FontAwesomeIcons.google),
-                        ),
-                        const SizedBox(width: 20),
-                        IconButton(
-                          onPressed: () {},
-                          icon: const Icon(FontAwesomeIcons.facebook),
-                        ),
-                      ],
-                    ),
                     const SizedBox(height: 30),
                     state is SignInLoading
                         ? const Center(

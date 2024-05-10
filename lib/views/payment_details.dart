@@ -1,9 +1,8 @@
 import 'dart:convert';
 import 'dart:developer';
-
-import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/utils/api_key.dart';
 import 'package:bookstore/cubits/stripe/stripe_payment_cubit.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/models/amount_model/amount_model.dart';
 import 'package:bookstore/models/amount_model/details.dart';
 import 'package:bookstore/models/item_list_model/item.dart';
@@ -11,7 +10,6 @@ import 'package:bookstore/models/item_list_model/item_list_model.dart';
 import 'package:bookstore/models/payment_intent_input_model.dart';
 import 'package:bookstore/views/payment_method_item.dart';
 import 'package:bookstore/views/payment_successful.dart';
-
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +43,7 @@ class _PaymentDeteilsState extends State<PaymentDeteils> {
       Uri.parse(apiUrl),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer $kToken',
+        'Authorization': 'Bearer ${CacheNetwork.getCacheData(key: 'token')}',
       },
       body: encodedBody,
     );

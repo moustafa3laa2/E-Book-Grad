@@ -1,6 +1,7 @@
 import 'package:bookstore/cache/cache_helper.dart';
 import 'package:bookstore/core/services/service_locator.dart';
 import 'package:bookstore/core/utils/api_key.dart';
+import 'package:bookstore/cubits/add_to_cart/add_to_cart_cubit.dart';
 import 'package:bookstore/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:bookstore/cubits/get_books/book_id/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/get_Category_books/get_books_cubit.dart';
@@ -78,6 +79,9 @@ class BookStore extends StatelessWidget {
         ),
         BlocProvider<GetmarksBooksCubit>(
           create: (BuildContext context) => GetmarksBooksCubit(),
+        ),
+        BlocProvider<AddToCartCubit>(
+          create: (BuildContext context) => AddToCartCubit(),
         ),
       ],
       child: MaterialApp(

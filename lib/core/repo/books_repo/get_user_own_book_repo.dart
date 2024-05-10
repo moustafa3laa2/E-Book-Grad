@@ -1,8 +1,6 @@
 import 'dart:convert';
-
-import 'package:bookstore/constants.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/models/user_own_books_model.dart';
-
 import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
@@ -16,7 +14,7 @@ class GetownBooksRepo {
       var response = await http.get(
         url,
         headers: {
-          'Authorization': 'Bearer $kToken',
+          'Authorization': 'Bearer ${CacheNetwork.getCacheData(key: 'token')}',
         },
       );
       var decodedResponse = jsonDecode(response.body);

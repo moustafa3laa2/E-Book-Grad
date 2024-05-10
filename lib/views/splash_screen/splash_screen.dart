@@ -1,6 +1,7 @@
 import 'package:bookstore/cache/cache_helper.dart';
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/services/service_locator.dart';
+import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/onboarding_screens/onboarding.dart';
 import 'package:bookstore/views/signin-up/sign_in_view.dart';
 import 'package:bookstore/views/user_nav_bar_m.dart';
@@ -26,9 +27,11 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => kToken != null && kToken != ""
-                ? const UserNavigationBar()
-                : const Signin(),
+            builder: (context) =>
+                CacheNetwork.getCacheData(key: 'token') != null &&
+                        CacheNetwork.getCacheData(key: 'token') != ""
+                    ? const UserNavigationBar()
+                    : const Signin(),
           ),
         );
       } else {

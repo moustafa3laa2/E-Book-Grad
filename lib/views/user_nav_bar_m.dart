@@ -79,11 +79,11 @@ class UserNavigationBar extends StatelessWidget {
                 title: const Text('Log out'),
                 leading: const Icon(Icons.logout, color: Colors.black),
                 onTap: () {
-                  Navigator.pushReplacement(
+                  CacheNetwork.deleteCacheItem(key: 'token');
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const Signin()),
                   );
-                  CacheNetwork.deleteCacheItem(key: 'token');
                 }),
           ],
         ),
@@ -134,7 +134,7 @@ class UserNavigationBar extends StatelessWidget {
           if (state is BottomNavigationBarInitial ||
               state is BottomNavigationBarHome) {
             if (kDebugMode) {
-              print(' token : $kToken');
+              print(' token : ${CacheNetwork.getCacheData(key: 'token')}');
             }
             return const HomeView();
           } else if (state is BottomNavigationBarCategory) {

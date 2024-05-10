@@ -1,9 +1,6 @@
-import 'package:bookstore/helper/local_network.dart';
 import 'package:flutter/material.dart';
 
 const Color kPrimerycolor = Color(0xff7B61FF);
-String kToken = CacheNetwork.getCacheData(key: 'token');
-
 double getResponsiveFontSize(BuildContext context, {required double fontSize}) {
   double scaleFactor = getScaleFactor(context);
   double responsiveFontSize = fontSize * scaleFactor;

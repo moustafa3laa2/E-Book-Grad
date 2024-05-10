@@ -181,7 +181,7 @@ class _BestDealsSectionState extends State<BestDealsSection> {
               );
             } else if (state is GetonsaleBooksFailure) {
               return const Center(
-                child: Text('Failed to load books: '),
+                child: Text('Failed to load books:'),
               );
             }
             return const SizedBox(

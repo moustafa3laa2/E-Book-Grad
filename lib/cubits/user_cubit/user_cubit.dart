@@ -36,7 +36,7 @@ class UserCubit extends Cubit<UserState> {
     try {
       emit(SignInLoading());
       final response = await Api().post(
-        token: kToken,
+        token: CacheNetwork.getCacheData(key: 'token'),
         url: 'https://book-store-api-mu.vercel.app/User/Login',
         body: {
           'username': signInEmail.text,
