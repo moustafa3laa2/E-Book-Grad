@@ -1,4 +1,3 @@
-import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/cart.dart';

@@ -27,11 +27,9 @@ class _SplashScreenState extends State<SplashScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) =>
-                CacheNetwork.getCacheData(key: 'token') != null &&
-                        CacheNetwork.getCacheData(key: 'token') != ""
-                    ? const UserNavigationBar()
-                    : const Signin(),
+            builder: (context) => CacheNetwork.getCacheData(key: 'token') != ""
+                ? const UserNavigationBar()
+                : const Signin(),
           ),
         );
       } else {
