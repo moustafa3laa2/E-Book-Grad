@@ -2,6 +2,7 @@ import 'package:bookstore/constants.dart';
 import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/widgets/add_comment_for_rating.dart';
+import 'package:bookstore/widgets/comments_of_book.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/description_book.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
@@ -176,6 +177,17 @@ class SelectedBookCard2 extends StatelessWidget {
           const SizedBox(
             height: 25,
           ),
+          const Divider(
+            height: 20,
+          ),
+          Text(
+            'Comments',
+            style: TextStyle(
+              fontSize: getResponsiveFontSize(context, fontSize: 20),
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const CommentsOfBook(),
           const AddCommentForRating(),
         ],
       ),
