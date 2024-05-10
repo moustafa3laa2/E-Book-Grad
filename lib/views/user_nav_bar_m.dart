@@ -79,7 +79,7 @@ class UserNavigationBar extends StatelessWidget {
                 leading: const Icon(Icons.logout, color: Colors.black),
                 onTap: () {
                   CacheNetwork.deleteCacheItem(key: 'token');
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => const Signin()),
                   );

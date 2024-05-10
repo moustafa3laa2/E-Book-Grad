@@ -1,4 +1,4 @@
-import 'package:bookstore/cubits/user_cubit/user_cubit.dart';
+import 'package:bookstore/cubits/sign_in/sign_in_cubit.dart';
 import 'package:bookstore/views/list_settings.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/top_bar.dart';
@@ -12,7 +12,7 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserCubit, UserState>(
+    return BlocConsumer<SignInCubit, SignInState>(
       listener: (context, state) {
         if (state is SignInFailure) {
           ScaffoldMessenger.of(context).showSnackBar(

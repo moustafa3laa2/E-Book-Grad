@@ -1,5 +1,5 @@
 import 'package:bookstore/constants.dart';
-import 'package:bookstore/cubits/user_cubit/user_cubit.dart';
+import 'package:bookstore/cubits/sign_up/sign_up_cubit.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/custom_text_form_field.dart';
 import 'package:bookstore/widgets/top_bar.dart';
@@ -18,7 +18,7 @@ class _SignUpState extends State<SignUp> {
   bool _isVisible = true;
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<UserCubit, UserState>(
+    return BlocConsumer<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpSuccess) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -40,7 +40,7 @@ class _SignUpState extends State<SignUp> {
             body: Padding(
           padding: const EdgeInsets.all(15),
           child: Form(
-            key: context.read<UserCubit>().signUpFormKey,
+            key: context.read<SignUpCubit>().signUpFormKey,
             child: Center(
               child: ListView(
                 children: [
@@ -61,7 +61,8 @@ class _SignUpState extends State<SignUp> {
                     children: [
                       Expanded(
                         child: CustomTextFormField(
-                          controller: context.read<UserCubit>().signUpFirstName,
+                          controller:
+                              context.read<SignUpCubit>().signUpFirstName,
                           obscureText: false,
                           hintText: 'First Name',
                           prefixIcon: const Icon(FontAwesomeIcons.user),
@@ -83,7 +84,8 @@ class _SignUpState extends State<SignUp> {
                       ),
                       Expanded(
                         child: CustomTextFormField(
-                          controller: context.read<UserCubit>().signUpLastName,
+                          controller:
+                              context.read<SignUpCubit>().signUpLastName,
                           obscureText: false,
                           hintText: 'Last Name',
                           prefixIcon: const Icon(FontAwesomeIcons.user),
@@ -105,7 +107,7 @@ class _SignUpState extends State<SignUp> {
                   const SizedBox(height: 20),
 
                   CustomTextFormField(
-                    controller: context.read<UserCubit>().signUpUserName,
+                    controller: context.read<SignUpCubit>().signUpUserName,
                     obscureText: false,
                     hintText: 'Username',
                     prefixIcon: const Icon(FontAwesomeIcons.user),
@@ -123,7 +125,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    controller: context.read<UserCubit>().signUpEmail,
+                    controller: context.read<SignUpCubit>().signUpEmail,
                     obscureText: false,
                     hintText: 'Email',
                     prefixIcon: const Icon(Icons.email),
@@ -141,7 +143,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   const SizedBox(height: 20),
                   CustomTextFormField(
-                    controller: context.read<UserCubit>().signUpPassword,
+                    controller: context.read<SignUpCubit>().signUpPassword,
                     obscureText: _isVisible,
                     hintText: 'Password',
                     prefixIcon: const Icon(Icons.lock),
@@ -170,7 +172,7 @@ class _SignUpState extends State<SignUp> {
                           color: Colors.black,
                           title: 'Register',
                           onTap: () {
-                            context.read<UserCubit>().signUp();
+                            context.read<SignUpCubit>().signUp();
                             // if (formKey.currentState!.validate()) {
 
                             // }

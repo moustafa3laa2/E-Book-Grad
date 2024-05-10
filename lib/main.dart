@@ -14,7 +14,8 @@ import 'package:bookstore/cubits/get_books/get_user_Bookmarks_books/get_books_cu
 import 'package:bookstore/cubits/get_books/get_user_fav_books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
-import 'package:bookstore/cubits/user_cubit/user_cubit.dart';
+import 'package:bookstore/cubits/sign_in/sign_in_cubit.dart';
+import 'package:bookstore/cubits/sign_up/sign_up_cubit.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/simple_bloc_observer.dart';
 import 'package:bookstore/views/splash_screen/splash_screen.dart';
@@ -31,10 +32,7 @@ void main() async {
   await CacheNetwork.cacheInitialization();
   Bloc.observer = SimpleBlocObserver();
 
-  runApp(BlocProvider(
-    create: (context) => UserCubit(),
-    child: const BookStore(),
-  ));
+  runApp(const BookStore());
 }
 
 class BookStore extends StatelessWidget {
@@ -82,6 +80,12 @@ class BookStore extends StatelessWidget {
         ),
         BlocProvider<AddToCartCubit>(
           create: (BuildContext context) => AddToCartCubit(),
+        ),
+        BlocProvider<SignInCubit>(
+          create: (BuildContext context) => SignInCubit(),
+        ),
+        BlocProvider<SignUpCubit>(
+          create: (BuildContext context) => SignUpCubit(),
         ),
       ],
       child: MaterialApp(
