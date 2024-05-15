@@ -36,37 +36,82 @@ class _UserFavouriteBooksState extends State<UserFavouriteBooks> {
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: BlocBuilder<GetFavoritesBooksCubit, GetFavoriteState>(
-            builder: (context, state) {
-              if (state is GetFavoriteBooksLoading) {
-                return const Center(
-                    child: CircularProgressIndicator(
+              builder: (context, state) {
+            if (state is GetFavoriteBooksLoading) {
+              return const Center(
+                child: CircularProgressIndicator(
                   color: Colors.black,
-                ));
-              } else if (state is GetFavoriteBooksSuccess) {
-                return ListView.builder(
-                  itemCount: state.books.favorites!.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                          right: 12, left: 12, bottom: 12.0),
-                      child: SearchCardOfCartBook(
-                        image:
-                            state.books.favorites![index].image!.url.toString(),
-                        title: state.books.favorites![index].title!,
-                        price: state.books.favorites![index].price.toString(),
-                        autherName: state.books.favorites![index].author!,
-                        category: state.books.favorites![index].category!,
-                        bookid: state.books.favorites![index].sId!.toString(),
+                ),
+              );
+            } else if (state is GetFavoriteBooksSuccess) {
+              if (state.books.favorites!.isEmpty) {
+                return Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
                       ),
-                    );
-                  },
+                      Image.asset(
+                        'assets/images/emptyfavouritebook.png',
+                        height: 300,
+                        width: 300,
+                      ),
+                      Text(
+                        'No Favourite Books',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize:
+                                getResponsiveFontSize(context, fontSize: 25),
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 );
               } else {
-                return const Center(child: Text('No Favourite Books'));
+                return BlocBuilder<GetFavoritesBooksCubit, GetFavoriteState>(
+                  builder: (context, state) {
+                    if (state is GetFavoriteBooksLoading) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.black,
+                      ));
+                    } else if (state is GetFavoriteBooksSuccess) {
+                      return ListView.builder(
+                        itemCount: state.books.favorites!.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                right: 12, left: 12, bottom: 12.0),
+                            child: SearchCardOfCartBook(
+                              image: state.books.favorites![index].image!.url
+                                  .toString(),
+                              title: state.books.favorites![index].title!,
+                              price: state.books.favorites![index].price
+                                  .toString(),
+                              autherName: state.books.favorites![index].author!,
+                              category: state.books.favorites![index].category!,
+                              bookid:
+                                  state.books.favorites![index].sId!.toString(),
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(child: Text('No Favourite Books'));
+                    }
+                  },
+                );
               }
-            },
-          ),
+            } else if (state is GetFavoriteBooksFailure) {
+              return const Center(
+                child: Text('Failed to load favourite books'),
+              );
+            }
+            return const SizedBox(
+              child: Text('Failed to load favourite books'),
+            );
+          }),
 
           // child: FutureBuilder<List<FavBooksModel>>(
           //   future: GetFavBooksServices().getFavBooks(),

@@ -51,45 +51,94 @@ class _UserBooksState extends State<UserBooks> {
         body: Padding(
           padding: const EdgeInsets.all(10),
           child: BlocBuilder<GetownBooksCubit, GetownBooksState>(
-            builder: (context, state) {
-              if (state is GetownBooksLoading) {
-                return const Center(
-                    child: CircularProgressIndicator(
+              builder: (context, state) {
+            if (state is GetownBooksLoading) {
+              return const Center(
+                child: CircularProgressIndicator(
                   color: Colors.black,
-                ));
-              } else if (state is GetownBooksSuccess) {
-                return ListView.builder(
-                  itemCount: state.books.books!.length,
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(
-                          right: 12, left: 12, bottom: 12.0),
-                      child: CardOfUserBooks(
-                        image: state.books.books![index].image!.url.toString(),
-                        title: state.books.books![index].title!,
-                        price: state.books.books![index].price.toString(),
-                        ontap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute<void>(
-                                builder: (BuildContext context) => OpenBook(
-                                  bookurl: state.books.books![index].pdf!.url
-                                      .toString(),
-                                ),
-                              ));
-                        },
-                        author: state.books.books![index].author!,
-                        type: state.books.books![index].category!,
+                ),
+              );
+            } else if (state is GetownBooksSuccess) {
+              if (state.books.books!.isEmpty) {
+                return Center(
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
                       ),
-                    );
-                  },
+                      Image.asset(
+                        'assets/images/emptyownbooks.png',
+                        height: 300,
+                        width: 300,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        'Buy some books',
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontSize:
+                                getResponsiveFontSize(context, fontSize: 30),
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
                 );
               } else {
-                return const Center(child: Text('No Favourite Books'));
+                return BlocBuilder<GetownBooksCubit, GetownBooksState>(
+                  builder: (context, state) {
+                    if (state is GetownBooksLoading) {
+                      return const Center(
+                          child: CircularProgressIndicator(
+                        color: Colors.black,
+                      ));
+                    } else if (state is GetownBooksSuccess) {
+                      return ListView.builder(
+                        itemCount: state.books.books!.length,
+                        scrollDirection: Axis.vertical,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.only(
+                                right: 12, left: 12, bottom: 12.0),
+                            child: CardOfUserBooks(
+                              image: state.books.books![index].image!.url
+                                  .toString(),
+                              title: state.books.books![index].title!,
+                              price: state.books.books![index].price.toString(),
+                              ontap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute<void>(
+                                      builder: (BuildContext context) =>
+                                          OpenBook(
+                                        bookurl: state
+                                            .books.books![index].pdf!.url
+                                            .toString(),
+                                      ),
+                                    ));
+                              },
+                              author: state.books.books![index].author!,
+                              type: state.books.books![index].category!,
+                            ),
+                          );
+                        },
+                      );
+                    } else {
+                      return const Center(child: Text('No Books found'));
+                    }
+                  },
+                );
               }
-            },
-          ),
+            } else if (state is GetownBooksFailure) {
+              return const Center(
+                child: Text('Failed to load own books'),
+              );
+            }
+            return const SizedBox(
+              child: Text('Failed to load own books'),
+            );
+          }),
         ),
       ),
     );

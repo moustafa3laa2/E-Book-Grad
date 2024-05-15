@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:bookstore/core/utils/api_key.dart';
 import 'package:bookstore/cubits/stripe/stripe_payment_cubit.dart';
+import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/models/amount_model/amount_model.dart';
 import 'package:bookstore/models/amount_model/details.dart';
@@ -49,6 +50,13 @@ class _PaymentDeteilsState extends State<PaymentDeteils> {
     );
 
     if (response.statusCode == 200) {
+      for (var i = 0; i < widget.bookIds.length; i++) {
+        await Api().delete(
+          url:
+              'https://book-store-api-mu.vercel.app/User/Bookmarks/${widget.bookIds[i]}',
+          token: CacheNetwork.getCacheData(key: 'token'),
+        );
+      }
       if (kDebugMode) {
         print("Post successful!");
         print("Response: ${response.body}");
