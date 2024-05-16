@@ -1,3 +1,4 @@
+import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_Category_books/get_books_cubit.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
@@ -52,16 +53,14 @@ class _BookCardOfCategoryListViewState
                             price: state.books.books![index].price.toString(),
                             autherName: state.books.books![index].author!,
                             category: state.books.books![index].category!,
-                             bookid: state.books.books![index].sId!,
+                            bookid: state.books.books![index].sId!,
                           ),
                         );
                       },
                     ),
                   );
                 } else {
-                  return const Center(
-                    child: Text('Error'),
-                  );
+                  return const BooksError();
                 }
               },
             ),
