@@ -102,7 +102,9 @@ class _SelectedBookViewState extends State<SelectedBookView> {
                     return SelectedBookCard2(
                       image: state.books.book!.image!.url.toString(),
                       title: state.books.book!.title!,
-                      price: state.books.book!.price!.toString(),
+                      price: state.books.book!.onsale!
+                          ? state.books.book!.saleprice!.toString()
+                          : state.books.book!.price!.toString(),
                       category: state.books.book!.category!,
                       autherName: state.books.book!.author!,
                       description: state.books.book!.description!,

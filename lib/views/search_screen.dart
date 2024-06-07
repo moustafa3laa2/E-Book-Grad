@@ -122,7 +122,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                         .toString(),
                                     title: state.books[index].title!,
                                     autherName: state.books[index].author!,
-                                    price: state.books[index].price!.toString(),
+                                    price: state.books[index].onsale!
+                                        ? state.books[index].saleprice!
+                                            .toString()
+                                        : state.books[index].price!.toString(),
                                     category: state.books[index].category!,
                                     bookid: state.books[index].sId!,
                                   ));

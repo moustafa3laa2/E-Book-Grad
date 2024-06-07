@@ -87,7 +87,9 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
                       child: BookCard(
                         image: state.books.book![index].image!.url.toString(),
                         title: state.books.book![index].title!,
-                        price: state.books.book![index].price.toString(),
+                        price: state.books.book![index].onsale!
+                            ? state.books.book![index].saleprice!.toString()
+                            : state.books.book![index].price!.toString(),
                         category: state.books.book![index].category!,
                         autherName: state.books.book![index].author!,
                         description: state.books.book![index].description!,

@@ -51,7 +51,9 @@ class _SeeAllBooksState extends State<SeeAllBooks> {
                     child: SearchCardOfCartBook(
                       image: state.books[index].image!.url.toString(),
                       title: state.books[index].title!,
-                      price: state.books[index].price!.toString(),
+                      price: state.books[index].onsale!
+                          ? state.books[index].saleprice!.toString()
+                          : state.books[index].price!.toString(),
                       category: state.books[index].category!,
                       autherName: state.books[index].author!,
                       bookid: state.books[index].sId!,

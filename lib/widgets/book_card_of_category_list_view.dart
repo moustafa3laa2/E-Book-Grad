@@ -50,7 +50,10 @@ class _BookCardOfCategoryListViewState
                             image:
                                 state.books.books![index].image!.url.toString(),
                             title: state.books.books![index].title!,
-                            price: state.books.books![index].price.toString(),
+                            price: state.books.books![index].onsale!
+                                ? state.books.books![index].saleprice!
+                                    .toString()
+                                : state.books.books![index].price!.toString(),
                             autherName: state.books.books![index].author!,
                             category: state.books.books![index].category!,
                             bookid: state.books.books![index].sId!,

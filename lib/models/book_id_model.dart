@@ -25,6 +25,7 @@ class Book {
     required this.description,
     required this.category,
     required this.price,
+     this.saleprice,
     required this.topseller,
     required this.onsale,
     required this.upcoming,
@@ -44,6 +45,7 @@ class Book {
   final String? description;
   final String? category;
   var price;
+  var saleprice;
   final bool? topseller;
   final bool? onsale;
   final bool? upcoming;
@@ -66,6 +68,7 @@ class Book {
       description: json["description"],
       category: json["category"],
       price: json["price"],
+      saleprice: json["saleprice"],
       topseller: json["topseller"],
       onsale: json["onsale"],
       upcoming: json["upcoming"],

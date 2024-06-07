@@ -110,8 +110,12 @@ class _CartState extends State<Cart> {
                                     title: state.books.bookmarks![index].title!,
                                     author:
                                         state.books.bookmarks![index].author!,
-                                    price: state.books.bookmarks![index].price!
-                                        .toString(),
+                                    price: state.books.bookmarks![index].onsale!
+                                        ? state
+                                            .books.bookmarks![index].saleprice!
+                                            .toString()
+                                        : state.books.bookmarks![index].price!
+                                            .toString(),
                                     type:
                                         state.books.bookmarks![index].category!,
                                     bookid: state.books.bookmarks![index].sId!,
@@ -164,7 +168,9 @@ class _CartState extends State<Cart> {
                             itemCount: state.books.bookmarks!.length,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) {
-                              total += state.books.bookmarks![index].price!;
+                              total += state.books.bookmarks![index].onsale!
+                                  ? state.books.bookmarks![index].saleprice!
+                                  : state.books.bookmarks![index].price!;
                               return index == state.books.bookmarks!.length - 1
                                   ? Row(
                                       children: [
