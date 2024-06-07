@@ -7,7 +7,6 @@ import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/description_book.dart';
 import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class SelectedBookCard2 extends StatelessWidget {
   const SelectedBookCard2(
@@ -192,7 +191,7 @@ class SelectedBookCard2 extends StatelessWidget {
             ),
           ),
           const CommentsOfBook(),
-          const AddCommentForRating(),
+          AddCommentForRating(bookid: bookid),
         ],
       ),
     );
