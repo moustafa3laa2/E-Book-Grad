@@ -1,6 +1,7 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_newarrival_books/get_books_cubit.dart';
 import 'package:bookstore/widgets/book_card.dart';
+import 'package:bookstore/widgets/custom_loading_small_card.dart';
 import 'package:bookstore/widgets/see_all/see_all_Lastest_Books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -71,11 +72,7 @@ class _BooknewarrivalCardListViewState
         BlocBuilder<GetnewarrivalBooksCubit, GearrivalBooksState>(
           builder: (context, state) {
             if (state is GetnewarrivalBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingSmallCard();
             } else if (state is GetnewarrivalBooksSuccess) {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.45,

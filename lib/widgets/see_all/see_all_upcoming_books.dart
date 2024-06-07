@@ -1,5 +1,6 @@
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_upcoming_books/get_books_cubit.dart';
+import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -35,11 +36,7 @@ class _SeeAllUpcomingBooksState extends State<SeeAllUpcomingBooks> {
         child: BlocBuilder<GetupcomingBooksCubit, GetupcomingBooksState>(
           builder: (context, state) {
             if (state is GetupcomingBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingBigCard();
             } else if (state is GetupcomingBooksSuccess) {
               return ListView.builder(
                 scrollDirection: Axis.vertical,
@@ -48,6 +45,7 @@ class _SeeAllUpcomingBooksState extends State<SeeAllUpcomingBooks> {
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 12),
                     child: SearchCardOfCartBook(
+                      rate: state.books.book![index].averageRating!.toDouble(),
                       image: state.books.book![index].image!.url.toString(),
                       title: state.books.book![index].title!,
                       price: '',

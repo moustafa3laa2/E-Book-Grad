@@ -1,6 +1,7 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_topseller%20-books/get_books_cubit.dart';
 import 'package:bookstore/widgets/book_card.dart';
+import 'package:bookstore/widgets/custom_loading_small_card.dart';
 import 'package:bookstore/widgets/see_all/see_all_top_books.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -70,11 +71,7 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
         BlocBuilder<GettopsellerBooksCubit, GettopsellerBooksstate>(
           builder: (context, state) {
             if (state is GettopsellerBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingSmallCard();
             } else if (state is GettopsellerBooksSuccess) {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * 0.45,
@@ -113,17 +110,5 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
         ),
       ],
     );
-    // return Row(
-    //   children: bookCardImage
-    //       .map((e) => const Expanded(
-    //             child: Padding(
-    //               padding: EdgeInsets.only(left: 12),
-    //               child: BookCardd(
-    //                 image: 'assets/images/topBooks2.png',
-    //               ),
-    //             ),
-    //           ))
-    //       .toList(),
-    // );
   }
 }

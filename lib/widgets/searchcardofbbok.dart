@@ -1,5 +1,6 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/views/selected_book_view.dart';
+import 'package:bookstore/widgets/rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class SearchCardOfCartBook extends StatelessWidget {
@@ -10,13 +11,15 @@ class SearchCardOfCartBook extends StatelessWidget {
       required this.autherName,
       required this.price,
       required this.category,
-      required this.bookid});
+      required this.bookid,
+      required this.rate});
   final String image;
   final String title;
   final String autherName;
   final String price;
   final String category;
   final String bookid;
+  final double rate;
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -56,8 +59,7 @@ class SearchCardOfCartBook extends StatelessWidget {
               width: MediaQuery.of(context).size.width * (10 / 360),
             ),
             Container(
-              padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * (15 / 800)),
+              padding: const EdgeInsets.only(top: 5),
               width: MediaQuery.of(context).size.width * (120 / 360),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -83,37 +85,36 @@ class SearchCardOfCartBook extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  Text(autherName,
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: getResponsiveFontSize(context, fontSize: 16),
-                      )),
-                  const Spacer(),
+                  Text(
+                    autherName,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: getResponsiveFontSize(context, fontSize: 16),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  RatingBarWidget(size: 20, rating: rate),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 6),
+                    child: price != ''
+                        ? Text(r"$" "$price",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize:
+                                  getResponsiveFontSize(context, fontSize: 20),
+                              fontWeight: FontWeight.bold,
+                            ))
+                        : const Text(""),
+                  ),
                 ],
               ),
             ),
-            const Spacer(),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                const Spacer(),
-                Padding(
-                  padding: const EdgeInsets.only(right: 6),
-                  child: price != ''
-                      ? Text(r"$" "$price",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize:
-                                getResponsiveFontSize(context, fontSize: 20),
-                            fontWeight: FontWeight.bold,
-                          ))
-                      : const Text(""),
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * (10 / 800),
-                )
-              ],
-            ),
+            // const Spacer(),
           ],
         ),
       ),

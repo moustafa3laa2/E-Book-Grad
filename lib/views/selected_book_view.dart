@@ -1,6 +1,7 @@
 import 'package:bookstore/cubits/get_books/book_id/get_books_cubit.dart';
 import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
+import 'package:bookstore/widgets/custom_loading_selected_book.dart';
 import 'package:bookstore/widgets/selected_book_card2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -93,11 +94,7 @@ class _SelectedBookViewState extends State<SelectedBookView> {
               BlocBuilder<GetBookidCubit, GeBooksidtate>(
                 builder: (context, state) {
                   if (state is GeBookidLoading) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        color: Colors.black,
-                      ),
-                    );
+                    return const CustomLoadingSelectedBook();
                   } else if (state is GetBookidSuccess) {
                     return SelectedBookCard2(
                       image: state.books.book!.image!.url.toString(),

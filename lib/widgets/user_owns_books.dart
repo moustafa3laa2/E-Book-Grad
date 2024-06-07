@@ -4,6 +4,7 @@ import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/widgets/card_of_cart_user_books.dart';
+import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/open_book.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -54,11 +55,7 @@ class _UserBooksState extends State<UserBooks> {
           child: BlocBuilder<GetownBooksCubit, GetownBooksState>(
               builder: (context, state) {
             if (state is GetownBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingBigCard();
             } else if (state is GetownBooksSuccess) {
               if (state.books.books!.isEmpty) {
                 return Center(

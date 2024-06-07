@@ -1,5 +1,6 @@
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_Category_books/get_books_cubit.dart';
+import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -31,11 +32,7 @@ class _BookCardOfCategoryListViewState
             BlocBuilder<GetCategoryBooksCubit, GetCategoryState>(
               builder: (context, state) {
                 if (state is GetCategoryBooksLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(
-                      color: Colors.black,
-                    ),
-                  );
+                  return const CustomLoadingBigCard();
                 } else if (state is GetCategoryBooksSuccess) {
                   return SizedBox(
                     height: MediaQuery.of(context).size.height * 1,
@@ -47,6 +44,8 @@ class _BookCardOfCategoryListViewState
                           padding: const EdgeInsets.only(
                               right: 12, left: 12, bottom: 12.0),
                           child: SearchCardOfCartBook(
+                            rate: state.books.books![index].averageRating
+                                .toDouble(),
                             image:
                                 state.books.books![index].image!.url.toString(),
                             title: state.books.books![index].title!,

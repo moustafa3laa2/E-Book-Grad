@@ -1,6 +1,7 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_user_fav_books/get_books_cubit.dart';
+import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,11 +40,7 @@ class _UserFavouriteBooksState extends State<UserFavouriteBooks> {
           child: BlocBuilder<GetFavoritesBooksCubit, GetFavoriteState>(
               builder: (context, state) {
             if (state is GetFavoriteBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingBigCard();
             } else if (state is GetFavoriteBooksSuccess) {
               if (state.books.favorites!.isEmpty) {
                 return Center(
@@ -85,6 +82,7 @@ class _UserFavouriteBooksState extends State<UserFavouriteBooks> {
                             padding: const EdgeInsets.only(
                                 right: 12, left: 12, bottom: 12.0),
                             child: SearchCardOfCartBook(
+                              rate: state.books.favorites![index].averageRating,
                               image: state.books.favorites![index].image!.url
                                   .toString(),
                               title: state.books.favorites![index].title!,

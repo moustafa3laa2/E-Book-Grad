@@ -1,5 +1,6 @@
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
+import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -74,13 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? BlocBuilder<GetsearchBooksCubit, GetSearchState>(
                       builder: (context, state) {
                       if (state is GetSearchBooksLoading) {
-                        return const Center(
-                          child: Center(
-                            child: CircularProgressIndicator(
-                              color: Colors.black,
-                            ),
-                          ),
-                        );
+                        return const CustomLoadingBigCard();
                       } else if (state is GetSearchBooksSuccess) {
                         if (state.books.isEmpty) {
                           return Center(
@@ -118,6 +113,8 @@ class _SearchScreenState extends State<SearchScreen> {
                               return Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: SearchCardOfCartBook(
+                                    rate: state.books[index].averageRating!
+                                        .toDouble(),
                                     image: state.books[index].image!.url
                                         .toString(),
                                     title: state.books[index].title!,

@@ -1,6 +1,7 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_onsale_books/get_books_cubit.dart';
 import 'package:bookstore/views/selected_book_view.dart';
+import 'package:bookstore/widgets/custom_loading_on_sale_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,11 +39,7 @@ class _BestDealsSectionState extends State<BestDealsSection> {
         BlocBuilder<GetonsaleBooksCubit, GetonsaleBooksState>(
           builder: (context, state) {
             if (state is GetonsaleBooksLoading) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  color: Colors.black,
-                ),
-              );
+              return const CustomLoadingOnSaleCard();
             } else if (state is GetonsaleBooksSuccess) {
               return SizedBox(
                 height: MediaQuery.of(context).size.height * .25,
