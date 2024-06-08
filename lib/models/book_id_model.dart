@@ -34,8 +34,8 @@ class Book {
     required this.newarrival,
   });
 
-  final Image? image;
-  final Image? pdf;
+  final Imagee? image;
+  final Imagee? pdf;
   final String? id;
   final String? title;
   final String? author;
@@ -55,8 +55,8 @@ class Book {
 
   factory Book.fromJson(Map<String, dynamic> json) {
     return Book(
-      image: json["image"] == null ? null : Image.fromJson(json["image"]),
-      pdf: json["pdf"] == null ? null : Image.fromJson(json["pdf"]),
+      image: json["image"] == null ? null : Imagee.fromJson(json["image"]),
+      pdf: json["pdf"] == null ? null : Imagee.fromJson(json["pdf"]),
       id: json["_id"],
       title: json["title"],
       author: json["author"],
@@ -79,8 +79,8 @@ class Book {
   }
 }
 
-class Image {
-  Image({
+class Imagee {
+  Imagee({
     required this.name,
     required this.url,
   });
@@ -88,8 +88,8 @@ class Image {
   final String? name;
   final String? url;
 
-  factory Image.fromJson(Map<String, dynamic> json) {
-    return Image(
+  factory Imagee.fromJson(Map<String, dynamic> json) {
+    return Imagee(
       name: json["name"],
       url: json["url"],
     );
@@ -136,14 +136,14 @@ class User {
   final String? id;
   final String? firstname;
   final String? lastname;
-  final Image? image;
+  final Imagee? image;
 
   factory User.fromJson(Map<String, dynamic> json) {
     return User(
       id: json["_id"],
       firstname: json["firstname"],
       lastname: json["lastname"],
-      image: json["image"] == null ? null : Image.fromJson(json["image"]),
+      image: json["image"] == null ? null : Imagee.fromJson(json["image"]),
     );
   }
 }

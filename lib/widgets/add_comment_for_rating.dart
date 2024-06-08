@@ -1,12 +1,15 @@
 import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
+import 'package:bookstore/views/selected_book_view.dart';
 import 'package:bookstore/widgets/custom_text_form_field.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class AddCommentForRating extends StatelessWidget {
-  const AddCommentForRating({Key? key, required this.bookid});
+  const AddCommentForRating(
+      {Key? key, required this.bookid, required this.title});
   final String bookid;
+  final String title;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +31,7 @@ class AddCommentForRating extends StatelessWidget {
                   return RateBookDialog(
                     bookid: bookid,
                     addCommentController: addCommentController,
+                    title: title,
                   );
                 },
               );
@@ -42,9 +46,13 @@ class AddCommentForRating extends StatelessWidget {
 
 class RateBookDialog extends StatefulWidget {
   final String bookid;
+  final String title;
   final TextEditingController addCommentController;
 
-  RateBookDialog({required this.bookid, required this.addCommentController});
+  RateBookDialog(
+      {required this.bookid,
+      required this.addCommentController,
+      required this.title});
 
   @override
   _RateBookDialogState createState() => _RateBookDialogState();
@@ -52,6 +60,7 @@ class RateBookDialog extends StatefulWidget {
 
 class _RateBookDialogState extends State<RateBookDialog> {
   double rating = 0.0;
+  bool isRating = false;
 
   @override
   Widget build(BuildContext context) {
@@ -83,15 +92,31 @@ class _RateBookDialogState extends State<RateBookDialog> {
                 'comment': widget.addCommentController.text,
               },
             );
+            setState(() {
+              isRating = true;
+            });
             if (response != null) {
               widget.addCommentController.clear();
               Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (BuildContext context) => SelectedBookView(
+                    bookid: widget.bookid,
+                    title: widget.title,
+                  ),
+                ),
+              );
             }
           },
-          child: const Text(
-            "ok",
-            style: TextStyle(fontSize: 20),
-          ),
+          child: isRating
+              ? const CircularProgressIndicator(
+                  color: Colors.black,
+                )
+              : const Text(
+                  "ok",
+                  style: TextStyle(fontSize: 20),
+                ),
         )
       ],
     );

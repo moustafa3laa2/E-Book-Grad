@@ -82,12 +82,16 @@ class _UserFavouriteBooksState extends State<UserFavouriteBooks> {
                             padding: const EdgeInsets.only(
                                 right: 12, left: 12, bottom: 12.0),
                             child: SearchCardOfCartBook(
-                              rate: state.books.favorites![index].averageRating,
+                              rate: state.books.favorites![index].averageRating
+                                  .toDouble(),
                               image: state.books.favorites![index].image!.url
                                   .toString(),
                               title: state.books.favorites![index].title!,
-                              price: state.books.favorites![index].price
-                                  .toString(),
+                              price: state.books.favorites![index].onsale!
+                                  ? state.books.favorites![index].saleprice!
+                                      .toString()
+                                  : state.books.favorites![index].price!
+                                      .toString(),
                               autherName: state.books.favorites![index].author!,
                               category: state.books.favorites![index].category!,
                               bookid:
