@@ -100,17 +100,18 @@ class SearchCardOfCartBook extends StatelessWidget {
                     height: 5,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 6),
-                    child: price != ''
-                        ? Text(r"$" "$price",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize:
-                                  getResponsiveFontSize(context, fontSize: 20),
-                              fontWeight: FontWeight.bold,
-                            ))
-                        : const Text(""),
-                  ),
+                      padding: const EdgeInsets.only(right: 6),
+                      child: price != 'Owned'
+                          ? price != ''
+                              ? Text(r"$" "$price",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: getResponsiveFontSize(context,
+                                        fontSize: 20),
+                                    fontWeight: FontWeight.bold,
+                                  ))
+                              : const Text("")
+                          : const Text("")),
                 ],
               ),
             ),
