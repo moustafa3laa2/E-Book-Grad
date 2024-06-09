@@ -1,4 +1,5 @@
 import 'package:bookstore/core/errors/errorbooks.dart';
+import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
 import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
@@ -15,6 +16,32 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   bool isempty = true;
+  bool ownershipCheckComplete = false;
+
+  final Map<String, bool> ownedBooks = {};
+  void checkIfOwned(String bookId) {
+    final ownBooksState = context.read<GetownBooksCubit>().state;
+
+    if (ownBooksState is GetownBooksSuccess) {
+      final ownBooks = ownBooksState.books.books!;
+
+      for (var book in ownBooks) {
+        if (book.sId == bookId) {
+          ownedBooks[bookId] = true;
+          ownershipCheckComplete = true;
+          return;
+        }
+      }
+      ownedBooks[bookId] = false;
+      ownershipCheckComplete = true;
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetownBooksCubit>().getownBooks();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +56,6 @@ class _SearchScreenState extends State<SearchScreen> {
               ),
               TextFormField(
                 onChanged: (value) {
-                  // searchBook(value);
                   if (value.isNotEmpty) {
                     setState(() {
                       isempty = false;
@@ -110,21 +136,45 @@ class _SearchScreenState extends State<SearchScreen> {
                             physics: const NeverScrollableScrollPhysics(),
                             itemCount: state.books.length,
                             itemBuilder: (context, index) {
+                              final searchedBook = state.books[index];
+                              if (!ownedBooks.containsKey(searchedBook.sId)) {
+                                WidgetsBinding.instance
+                                    .addPostFrameCallback((_) {
+                                  checkIfOwned(searchedBook.sId!);
+                                  setState(() {});
+                                });
+                              }
+                              final isOwned =
+                                  ownedBooks[searchedBook.sId] ?? false;
                               return Padding(
                                   padding: const EdgeInsets.all(8.0),
-                                  child: SearchCardOfCartBook(
-                                    rate: state.books[index].averageRating!
-                                        .toDouble(),
-                                    image: state.books[index].image!.url
-                                        .toString(),
-                                    title: state.books[index].title!,
-                                    autherName: state.books[index].author!,
-                                    price: state.books[index].onsale!
-                                        ? state.books[index].saleprice!
-                                            .toString()
-                                        : state.books[index].price!.toString(),
-                                    category: state.books[index].category!,
-                                    bookid: state.books[index].sId!,
+                                  child: Column(
+                                    children: [
+                                      if (ownershipCheckComplete)
+                                        SearchCardOfCartBook(
+                                          rate: state
+                                              .books[index].averageRating!
+                                              .toDouble(),
+                                          image: state.books[index].image!.url
+                                              .toString(),
+                                          title: state.books[index].title!,
+                                          autherName:
+                                              state.books[index].author!,
+                                          price: isOwned
+                                              ? 'Owned'
+                                              : state.books[index].onsale!
+                                                  ? state
+                                                      .books[index].saleprice!
+                                                      .toString()
+                                                  : state.books[index].price!
+                                                      .toString(),
+                                          category:
+                                              state.books[index].category!,
+                                          bookid: state.books[index].sId!,
+                                        )
+                                      else
+                                        Container(),
+                                    ],
                                   ));
                             },
                           );
