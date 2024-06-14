@@ -86,6 +86,8 @@ class BookCard extends StatelessWidget {
                   ),
                   Text(
                     title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: getResponsiveFontSize(context, fontSize: 15),
@@ -97,6 +99,8 @@ class BookCard extends StatelessWidget {
                   ),
                   Text(
                     'By: $autherName',
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: getResponsiveFontSize(context, fontSize: 12),
