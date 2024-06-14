@@ -1,12 +1,10 @@
-import 'package:bookstore/cubits/sign_in/sign_in_cubit.dart';
+import 'package:bookstore/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:bookstore/views/edit_view.dart';
 import 'package:bookstore/views/list_settings.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/top_bar.dart';
 import 'package:bookstore/widgets/user_owns_books.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -15,29 +13,20 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SignInCubit, SignInState>(
-      listener: (context, state) {
-        if (state is SignInFailure) {
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: Text(state.errMessage),
-            ),
-          );
-        }
-      },
+    return BlocBuilder<GetUserInfoCubit, GetUserInfoState>(
       builder: (context, state) {
         return Scaffold(
           appBar: topBar(
             'Account Settings',
             null,
           ),
-          body: state is SignInLoading
+          body: state is GetUserInfoLoading
               ? const Center(
                   child: CircularProgressIndicator(
                     color: Colors.black,
                   ),
                 )
-              : state is SignInSuccess
+              : state is GetUserInfoSuccess
                   ? SingleChildScrollView(
                       child: Padding(
                         padding: EdgeInsets.only(
@@ -79,7 +68,7 @@ class SettingsView extends StatelessWidget {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  state.signInModel.firstname,
+                                  state.response.findUser!.firstname,
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -88,7 +77,7 @@ class SettingsView extends StatelessWidget {
                                   width: 5,
                                 ),
                                 Text(
-                                  state.signInModel.lastname,
+                                  state.response.findUser!.lastname,
                                   style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold),
@@ -96,7 +85,7 @@ class SettingsView extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              state.signInModel.email,
+                              state.response.findUser!.email,
                               style: const TextStyle(
                                 fontSize: 14,
                               ),

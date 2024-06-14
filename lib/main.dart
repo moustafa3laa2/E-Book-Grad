@@ -14,6 +14,7 @@ import 'package:bookstore/cubits/get_books/get_user_Bookmarks_books/get_books_cu
 import 'package:bookstore/cubits/get_books/get_user_fav_books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
+import 'package:bookstore/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:bookstore/cubits/sign_in/sign_in_cubit.dart';
 import 'package:bookstore/cubits/sign_up/sign_up_cubit.dart';
 import 'package:bookstore/cubits/update_user_profile/update_user_profile_cubit.dart';
@@ -90,6 +91,9 @@ class BookStore extends StatelessWidget {
         ),
         BlocProvider<UpdateUserProfileCubit>(
           create: (BuildContext context) => UpdateUserProfileCubit(),
+        ),
+        BlocProvider<GetUserInfoCubit>(
+          create: (BuildContext context) => GetUserInfoCubit(),
         ),
       ],
       child: MaterialApp(
