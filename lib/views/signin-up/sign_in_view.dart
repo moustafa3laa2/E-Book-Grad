@@ -75,8 +75,11 @@ class _SigninState extends State<Signin> {
                         : const Icon(Icons.visibility_off),
                   ),
                   validator: (value) {
-                    if (value!.isEmpty) {
+                    if (value == null || value.isEmpty) {
                       return "Password should not be empty";
+                    } else if (!RegExp(r'^(?=.*[A-Za-z\d]).{8,}$')
+                        .hasMatch(value)) {
+                      return "Password must be at least 8 characters or numbers";
                     }
                     return null;
                   },
@@ -103,7 +106,14 @@ class _SigninState extends State<Signin> {
                         color: Colors.black,
                         title: 'Get Started',
                         onTap: () {
-                          context.read<SignInCubit>().signIn();
+                          if (context
+                                  .read<SignInCubit>()
+                                  .signInFormKey
+                                  .currentState
+                                  ?.validate() ==
+                              true) {
+                            context.read<SignInCubit>().signIn();
+                          }
                         },
                       );
                     } else if (state is SignInLoading) {
@@ -116,7 +126,14 @@ class _SigninState extends State<Signin> {
                         color: Colors.black,
                         title: 'Get Started',
                         onTap: () {
-                          context.read<SignInCubit>().signIn();
+                          if (context
+                                  .read<SignInCubit>()
+                                  .signInFormKey
+                                  .currentState
+                                  ?.validate() ==
+                              true) {
+                            context.read<SignInCubit>().signIn();
+                          }
                         },
                       );
                     }
