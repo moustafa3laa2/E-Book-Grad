@@ -94,7 +94,7 @@ class BookStore extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: ThemeData(
-          fontFamily: 'RobotoSlab',
+          fontFamily: 'Rubik-Italic',
         ),
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),
