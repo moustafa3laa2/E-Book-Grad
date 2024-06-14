@@ -1,8 +1,8 @@
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
+import 'package:bookstore/widgets/book_card.dart';
 import 'package:bookstore/widgets/custom_loading_big_card.dart';
-import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -46,9 +46,9 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Column(
             children: [
               const SizedBox(
@@ -115,7 +115,10 @@ class _SearchScreenState extends State<SearchScreen> {
                                   'assets/images/svg/notfound.svg',
                                   height: 200,
                                   width: 200,
-                                  color: Colors.black,
+                                  colorFilter: const ColorFilter.mode(
+                                    Colors.black,
+                                    BlendMode.srcIn,
+                                  ),
                                 ),
                                 const SizedBox(
                                   height: 20,
@@ -131,52 +134,58 @@ class _SearchScreenState extends State<SearchScreen> {
                             ),
                           );
                         } else {
-                          return ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemCount: state.books.length,
-                            itemBuilder: (context, index) {
-                              final searchedBook = state.books[index];
-                              if (!ownedBooks.containsKey(searchedBook.sId)) {
-                                WidgetsBinding.instance
-                                    .addPostFrameCallback((_) {
-                                  checkIfOwned(searchedBook.sId!);
-                                  setState(() {});
-                                });
-                              }
-                              final isOwned =
-                                  ownedBooks[searchedBook.sId] ?? false;
-                              return Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    children: [
-                                      if (ownershipCheckComplete)
-                                        SearchCardOfCartBook(
-                                          rate: state
-                                              .books[index].averageRating!
-                                              .toDouble(),
-                                          image: state.books[index].image!.url
-                                              .toString(),
-                                          title: state.books[index].title!,
-                                          autherName:
-                                              state.books[index].author!,
-                                          price: isOwned
-                                              ? 'Owned'
-                                              : state.books[index].onsale!
-                                                  ? state
-                                                      .books[index].saleprice!
-                                                      .toString()
-                                                  : state.books[index].price!
-                                                      .toString(),
-                                          category:
-                                              state.books[index].category!,
-                                          bookid: state.books[index].sId!,
-                                        )
-                                      else
-                                        Container(),
-                                    ],
-                                  ));
-                            },
+                          return Container(
+                            height: MediaQuery.of(context).size.height * 0.7,
+                            child: GridView.builder(
+                                padding: const EdgeInsets.all(10),
+                                itemCount: state.books.length,
+                                gridDelegate:
+                                    const SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        childAspectRatio: .48,
+                                        crossAxisSpacing: 10,
+                                        mainAxisSpacing: 10),
+                                itemBuilder: (BuildContext context, int index) {
+                                  final searchedBook = state.books[index];
+                                  if (!ownedBooks
+                                      .containsKey(searchedBook.sId)) {
+                                    WidgetsBinding.instance
+                                        .addPostFrameCallback((_) {
+                                      checkIfOwned(searchedBook.sId!);
+                                      setState(() {});
+                                    });
+                                  }
+                                  final isOwned =
+                                      ownedBooks[searchedBook.sId] ?? false;
+                                  return Padding(
+                                    padding: const EdgeInsets.all(10.0),
+                                    child: (ownershipCheckComplete)
+                                        ? BookCard(
+                                            category:
+                                                state.books[index].category!,
+                                            bookid: state.books[index].sId!,
+                                            title: state.books[index].title!,
+                                            autherName:
+                                                state.books[index].author!,
+                                            price: isOwned
+                                                ? 'Owned'
+                                                : state.books[index].onsale!
+                                                    ? state
+                                                        .books[index].saleprice!
+                                                        .toString()
+                                                    : state.books[index].price!
+                                                        .toString(),
+                                            rating: state
+                                                .books[index].averageRating!
+                                                .toDouble(),
+                                            description:
+                                                state.books[index].description!,
+                                            image: state.books[index].image!.url
+                                                .toString(),
+                                          )
+                                        : Container(),
+                                  );
+                                }),
                           );
                         }
                       } else {
@@ -192,7 +201,10 @@ class _SearchScreenState extends State<SearchScreen> {
                           'assets/images/svg/find-book-icon.svg',
                           height: 200,
                           width: 200,
-                          color: Colors.black,
+                          colorFilter: const ColorFilter.mode(
+                            Colors.black,
+                            BlendMode.srcIn,
+                          ),
                         ),
                         const SizedBox(
                           height: 20,
