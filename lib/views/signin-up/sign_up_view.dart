@@ -67,12 +67,11 @@ class _SignUpState extends State<SignUp> {
                           hintText: 'First Name',
                           prefixIcon: const Icon(FontAwesomeIcons.user),
                           validator: (value) {
-                            if (!RegExp(
-                                    r'^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                                .hasMatch(value!)) {
-                              return "Please enter your name";
-                            } else if (value.isEmpty) {
-                              return "First Name should not be empty";
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your first name';
+                            }
+                            if (!RegExp(r"^[a-zA-Z]{2,30}$").hasMatch(value)) {
+                              return 'First name must be between 2 and 30 characters and contain only letters';
                             }
                             return null;
                           },
@@ -90,12 +89,11 @@ class _SignUpState extends State<SignUp> {
                           hintText: 'Last Name',
                           prefixIcon: const Icon(FontAwesomeIcons.user),
                           validator: (value) {
-                            if (!RegExp(
-                                    r'^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                                .hasMatch(value!)) {
-                              return "Please enter your name";
-                            } else if (value.isEmpty) {
-                              return "Last Name should not be empty";
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your last name';
+                            }
+                            if (!RegExp(r"^[a-zA-Z]{2,30}$").hasMatch(value)) {
+                              return 'Last name must be between 2 and 30 characters and contain only letters';
                             }
                             return null;
                           },
@@ -112,12 +110,11 @@ class _SignUpState extends State<SignUp> {
                     hintText: 'Username',
                     prefixIcon: const Icon(FontAwesomeIcons.user),
                     validator: (value) {
-                      if (!RegExp(
-                              r'^(([^<>()[\]\.,;:\s@\"]+(\.[^<>()[\]\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$')
-                          .hasMatch(value!)) {
-                        return "Please enter your name";
-                      } else if (value.isEmpty) {
-                        return "Username should not be empty";
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your username';
+                      }
+                      if (!RegExp(r"^[a-zA-Z0-9_]{3,15}$").hasMatch(value)) {
+                        return 'Username must be between 3 and 15 characters and contain only letters, numbers, and underscores';
                       }
                       return null;
                     },
@@ -154,8 +151,11 @@ class _SignUpState extends State<SignUp> {
                           : const Icon(Icons.visibility_off),
                     ),
                     validator: (value) {
-                      if (value!.isEmpty) {
+                      if (value == null || value.isEmpty) {
                         return "Password should not be empty";
+                      } else if (!RegExp(r'^(?=.*[A-Za-z\d]).{8,}$')
+                          .hasMatch(value)) {
+                        return "Password must be at least 8 characters or numbers";
                       }
                       return null;
                     },
@@ -172,10 +172,14 @@ class _SignUpState extends State<SignUp> {
                           color: Colors.black,
                           title: 'Register',
                           onTap: () {
-                            context.read<SignUpCubit>().signUp();
-                            // if (formKey.currentState!.validate()) {
-
-                            // }
+                            if (context
+                                    .read<SignUpCubit>()
+                                    .signUpFormKey
+                                    .currentState!
+                                    .validate() ==
+                                true) {
+                              context.read<SignUpCubit>().signUp();
+                            }
                           },
                         ),
                   const SizedBox(
