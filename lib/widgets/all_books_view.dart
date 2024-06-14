@@ -46,7 +46,7 @@ class _AllBooksViewState extends State<AllBooksView> {
               child: Row(
                 children: [
                   Text(
-                    'see more',
+                    'See All',
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: getResponsiveFontSize(context, fontSize: 20),
@@ -72,7 +72,7 @@ class _AllBooksViewState extends State<AllBooksView> {
               return const CustomLoadingSmallCard();
             } else if (state is GetbooksSuccess) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.38,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: state.books.length,

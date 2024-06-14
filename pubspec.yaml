@@ -45,7 +45,6 @@ dependencies:
   flutter_svg: ^2.0.9
   font_awesome_flutter: ^10.6.0
   google_sign_in: ^6.2.1
-  image_picker: ^1.0.7
   persistent_bottom_nav_bar: ^5.0.2
   shared_preferences: ^2.2.2
   smooth_page_indicator: ^1.1.0
@@ -55,6 +54,7 @@ dependencies:
   http: ^1.2.1
   flutter_launcher_icons: ^0.13.1
   shimmer: ^3.0.0
+  image_picker: ^1.1.2
 
 flutter_launcher_icons:
   android: true

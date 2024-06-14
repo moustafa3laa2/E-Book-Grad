@@ -71,7 +71,7 @@ Shimmer loadingSmallCard() {
                 const SizedBox(
                   height: 5,
                 ),
-                const RatingBarWidget(size: 30, rating: 0),
+                const RatingBarWidget(size: 25, rating: 0),
               ],
             ),
           ),

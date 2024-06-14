@@ -28,7 +28,7 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
         Row(
           children: [
             Text(
-              'Top Books',
+              'Best Seller',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -74,7 +74,7 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
               return const CustomLoadingSmallCard();
             } else if (state is GettopsellerBooksSuccess) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.38,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: state.books.book!.length,

@@ -57,7 +57,7 @@ class _SelectedBookViewState extends State<SelectedBookView> {
                 if (state is GetBookidSuccess && state.books.book != null) {
                   return IconButton(
                     icon: Icon(
-                      FontAwesomeIcons.heart,
+                      FontAwesomeIcons.solidHeart,
                       color: isFav ? Colors.red : Colors.black,
                       size: 24,
                     ),

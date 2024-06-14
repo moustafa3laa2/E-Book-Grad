@@ -30,7 +30,7 @@ class _BooknewarrivalCardListViewState
         Row(
           children: [
             Text(
-              'Lastest Books',
+              'New Arrivals',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -75,7 +75,7 @@ class _BooknewarrivalCardListViewState
               return const CustomLoadingSmallCard();
             } else if (state is GetnewarrivalBooksSuccess) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.38,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: state.books.book!.length,

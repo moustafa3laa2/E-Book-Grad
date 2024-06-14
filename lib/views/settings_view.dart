@@ -1,9 +1,12 @@
 import 'package:bookstore/cubits/sign_in/sign_in_cubit.dart';
+import 'package:bookstore/views/edit_view.dart';
 import 'package:bookstore/views/list_settings.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/top_bar.dart';
 import 'package:bookstore/widgets/user_owns_books.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -45,36 +48,52 @@ class SettingsView extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            Container(
-                              width: 160,
-                              height: 160,
-                              decoration: const BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  image: DecorationImage(
+                            Stack(
+                              children: [
+                                Container(
+                                  width: 160,
+                                  height: 160,
+                                  decoration: const BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    image: DecorationImage(
                                       fit: BoxFit.fill,
                                       // image: NetworkImage(state.user.profilePic),
                                       image: AssetImage(
-                                          'assets/images/accountpic.png'))),
+                                          'assets/images/accountpic.png'),
+                                    ),
+                                  ),
+                                ),
+                                Positioned(
+                                  bottom: -10,
+                                  right: 12,
+                                  child: IconButton(
+                                    onPressed: () {},
+                                    icon: const Icon(
+                                      Icons.add_a_photo,
+                                    ),
+                                  ),
+                                )
+                              ],
                             ),
-                            const Text(
-                              'Edit',
-                              style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height *
-                                  (5 / 800),
-                            ),
-                            Text(
-                              state.signInModel.username,
-                              style: const TextStyle(
-                                  fontSize: 22, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(
-                              height: MediaQuery.of(context).size.height *
-                                  (3 / 800),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  state.signInModel.firstname,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  state.signInModel.lastname,
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
                             ),
                             Text(
                               state.signInModel.email,
@@ -82,6 +101,37 @@ class SettingsView extends StatelessWidget {
                                 fontSize: 14,
                               ),
                             ),
+
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height *
+                                  (5 / 800),
+                            ),
+                            // Text(
+                            //   state.signInModel.username,
+                            //   style: const TextStyle(
+                            //       fontSize: 22, fontWeight: FontWeight.bold),
+                            // ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height *
+                                  (3 / 800),
+                            ),
+                            GestureDetector(
+                              onTap: () => Navigator.push(
+                                context,
+                                MaterialPageRoute<void>(
+                                  builder: (BuildContext context) =>
+                                      const EditView(),
+                                ),
+                              ),
+                              child: const Text(
+                                'Edit',
+                                style: TextStyle(
+                                    fontSize: 16,
+                                    color: Colors.blue,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+
                             const Divider(
                               color: Colors.grey,
                               height: 40,

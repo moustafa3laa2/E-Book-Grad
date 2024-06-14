@@ -26,7 +26,7 @@ class _BestDealsSectionState extends State<BestDealsSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Best Deals',
+          'Offers & Deals',
           style: TextStyle(
             fontWeight: FontWeight.w600,
             fontSize: getResponsiveFontSize(context, fontSize: 32),

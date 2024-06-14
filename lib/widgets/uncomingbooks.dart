@@ -29,7 +29,7 @@ class _BookuncomingCardListViewState extends State<BookuncomingCardListView> {
         Row(
           children: [
             Text(
-              'Upcoming Books',
+              'Coming Soon',
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -74,7 +74,7 @@ class _BookuncomingCardListViewState extends State<BookuncomingCardListView> {
               return const CustomLoadingSmallCard();
             } else if (state is GetupcomingBooksSuccess) {
               return SizedBox(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.41,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: state.books.book!.length,
