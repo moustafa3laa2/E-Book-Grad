@@ -18,58 +18,93 @@ class GetUserInfoModel {
 }
 
 class FindUser {
+  Image? image;
   String? sId;
-  final String firstname;
-  final String lastname;
-  final String username;
-  final String email;
+  String? firstname;
+  String? lastname;
+  String? username;
+  String? email;
   String? password;
-  List<String>? favorites;
-  List<String>? bookmarks;
-  List<String>? books;
+  List<dynamic>? favorites;
+  List<dynamic>? bookmarks;
+  List<dynamic>? books;
   bool? isAdmin;
   int? iV;
 
-  FindUser({
-    this.sId,
-    required this.firstname,
-    required this.lastname,
-    required this.username,
-    required this.email,
-    this.password,
-    this.favorites,
-    this.bookmarks,
-    this.books,
-    this.isAdmin,
-    this.iV,
-  });
+  FindUser(
+      {this.image,
+      this.sId,
+      this.firstname,
+      this.lastname,
+      this.username,
+      this.email,
+      this.password,
+      this.favorites,
+      this.bookmarks,
+      this.books,
+      this.isAdmin,
+      this.iV});
 
-  FindUser.fromJson(Map<String, dynamic> json)
-      : sId = json['_id'],
-        firstname = json['firstname'],
-        lastname = json['lastname'],
-        username = json['username'],
-        email = json['email'],
-        password = json['password'],
-        favorites = json['Favorites']?.cast<String>(),
-        bookmarks = json['Bookmarks']?.cast<String>(),
-        books = json['Books']?.cast<String>(),
-        isAdmin = json['isAdmin'],
-        iV = json['__v'];
+  FindUser.fromJson(Map<String, dynamic> json) {
+    image = json['image'] != null ? Image.fromJson(json['image']) : null;
+    sId = json['_id'];
+    firstname = json['firstname'];
+    lastname = json['lastname'];
+    username = json['username'];
+    email = json['email'];
+    password = json['password'];
+    favorites = json['Favorites'] != null
+        ? List<dynamic>.from(json['Favorites'])
+        : null;
+    bookmarks = json['Bookmarks'] != null
+        ? List<dynamic>.from(json['Bookmarks'])
+        : null;
+    books = json['Books'] != null ? List<dynamic>.from(json['Books']) : null;
+    isAdmin = json['isAdmin'];
+    iV = json['__v'];
+  }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+    if (image != null) {
+      data['image'] = image!.toJson();
+    }
     data['_id'] = sId;
     data['firstname'] = firstname;
     data['lastname'] = lastname;
     data['username'] = username;
     data['email'] = email;
     data['password'] = password;
-    data['Favorites'] = favorites;
-    data['Bookmarks'] = bookmarks;
-    data['Books'] = books;
+    if (favorites != null) {
+      data['Favorites'] = favorites;
+    }
+    if (bookmarks != null) {
+      data['Bookmarks'] = bookmarks;
+    }
+    if (books != null) {
+      data['Books'] = books;
+    }
     data['isAdmin'] = isAdmin;
     data['__v'] = iV;
+    return data;
+  }
+}
+
+class Image {
+  String? name;
+  String? url;
+
+  Image({this.name, this.url});
+
+  Image.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['url'] = url;
     return data;
   }
 }
