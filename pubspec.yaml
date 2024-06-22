@@ -55,6 +55,8 @@ dependencies:
   flutter_launcher_icons: ^0.13.1
   shimmer: ^3.0.0
   image_picker: ^1.1.2
+  flutter_localizations:
+    sdk: flutter
 
 flutter_launcher_icons:
   android: true
@@ -101,6 +103,7 @@ flutter:
     - family: Rubik-Italic
       fonts:
         - asset: assets/fonts/Rubik-Italic-VariableFont_wght.ttf
-  
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_intl:
+  enabled: true

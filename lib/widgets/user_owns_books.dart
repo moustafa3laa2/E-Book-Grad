@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/card_of_cart_user_books.dart';
 import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/open_book.dart';
@@ -43,7 +44,7 @@ class _UserBooksState extends State<UserBooks> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          title: Text('Your Books',
+          title: Text(S.of(context).yourbooks,
               style: TextStyle(
                   color: Colors.black,
                   fontSize: getResponsiveFontSize(context, fontSize: 24),

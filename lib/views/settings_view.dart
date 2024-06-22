@@ -1,15 +1,14 @@
 import 'dart:ui';
-
+import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_user_info/get_user_info_cubit.dart';
-import 'package:bookstore/models/allbooks_model.dart';
+import 'package:bookstore/generated/l10n.dart';
+import 'package:bookstore/views/changelang.dart';
 import 'package:bookstore/views/edit_view.dart';
 import 'package:bookstore/views/list_settings.dart';
-import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/top_bar.dart';
-import 'package:bookstore/widgets/user_owns_books.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -18,21 +17,31 @@ class SettingsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: topBar(
-        'Account Settings',
-        null,
+        S.of(context).AccountSettings,
+        IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios_new),
+        ),
       ),
       body: BlocBuilder<GetUserInfoCubit, GetUserInfoState>(
           builder: (context, state) {
         if (state is GetUserInfoLoading) {
           return const Center(
-            child: CircularProgressIndicator(),
+            child: CircularProgressIndicator(
+              color: Colors.black,
+            ),
           );
         } else if (state is GetUserInfoSuccess) {
-          return Seattings(
-            firstname: state.response.findUser!.firstname!,
-            lastname: state.response.findUser!.lastname!,
-            email: state.response.findUser!.email!,
-            image: state.response.findUser!.image!.url ?? "",
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Seattings(
+              firstname: state.response.findUser!.firstname!,
+              lastname: state.response.findUser!.lastname!,
+              email: state.response.findUser!.email!,
+              image: state.response.findUser!.image!.url ?? "",
+            ),
           );
         } else {
           return const Center(
@@ -69,49 +78,37 @@ class Seattings extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Stack(
-              children: [
-                Container(
-                  width: 160,
-                  height: 160,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    image: DecorationImage(
-                      fit: BoxFit.fill,
-                      // image: NetworkImage(state.user.profilePic),
-                      image: NetworkImage(image),
-                    ),
-                  ),
+            Container(
+              width: 160,
+              height: 160,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage(image),
                 ),
-                Positioned(
-                  bottom: -10,
-                  right: 12,
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.add_a_photo,
-                    ),
-                  ),
-                )
-              ],
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  firstname,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  lastname,
-                  style: const TextStyle(
-                      fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ],
+            Directionality(
+              textDirection: TextDirection.ltr,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    firstname,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Text(
+                    lastname,
+                    style: const TextStyle(
+                        fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+                ],
+              ),
             ),
             Text(
               email,
@@ -119,68 +116,56 @@ class Seattings extends StatelessWidget {
                 fontSize: 14,
               ),
             ),
-
             SizedBox(
               height: MediaQuery.of(context).size.height * (5 / 800),
-            ),
-            // Text(
-            //   state.signInModel.username,
-            //   style: const TextStyle(
-            //       fontSize: 22, fontWeight: FontWeight.bold),
-            // ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * (3 / 800),
             ),
             GestureDetector(
               onTap: () => Navigator.push(
                 context,
                 MaterialPageRoute<void>(
-                  builder: (BuildContext context) =>  EditView(image: image ),
+                  builder: (BuildContext context) => EditView(image: image),
                 ),
               ),
-              child: const Text(
-                'Edit',
-                style: TextStyle(
+              child: Text(
+                S.of(context).Edit,
+                style: const TextStyle(
                     fontSize: 16,
                     color: Colors.blue,
                     fontWeight: FontWeight.bold),
               ),
             ),
-
             const Divider(
               color: Colors.grey,
               height: 40,
             ),
+            ListTile(
+              leading: const CircleAvatar(
+                backgroundColor: Colors.black,
+                child: Icon(
+                  Icons.language,
+                  color: Colors.white,
+                  size: 20,
+                ),
+              ),
+              title: Text(
+                S.of(context).language,
+                style: TextStyle(
+                  fontSize: getResponsiveFontSize(context, fontSize: 18),
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              trailing: LanguageSelection(),
+            ),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * (10 / 800),
+            ),
             ListSettings(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<void>(
-                    builder: (BuildContext context) => const UserBooks(),
-                  ),
-                );
-              },
-              title: 'My Books',
-              iconData: (FontAwesomeIcons.book),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * (10 / 800),
-            ),
-            const ListSettings(
-              title: 'Favorite',
-              iconData: (Icons.favorite),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * (10 / 800),
-            ),
-            const ListSettings(
-              title: 'About Us',
+              title: S.of(context).AboutUs,
               iconData: (Icons.info),
             ),
             SizedBox(
               height: MediaQuery.of(context).size.height * (40 / 800),
             ),
-            const CustomButton(color: Colors.red, title: 'Log Out')
           ],
         ),
       ),

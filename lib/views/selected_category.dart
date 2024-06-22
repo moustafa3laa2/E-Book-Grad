@@ -4,15 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class SelectedCategory extends StatelessWidget {
-  const SelectedCategory({super.key, required this.categoryName});
+  const SelectedCategory(
+      {super.key,
+      required this.categoryName,
+      required this.getLocalizedCategoryItems});
   final String categoryName;
+  final String getLocalizedCategoryItems;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Column(
       children: [
         topBar(
-          categoryName,
+          getLocalizedCategoryItems,
           IconButton(
             onPressed: () {
               Navigator.pop(context);

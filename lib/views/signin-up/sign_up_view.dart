@@ -1,5 +1,7 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/sign_up/sign_up_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
+import 'package:bookstore/views/signin-up/sign_in_view.dart';
 import 'package:bookstore/widgets/custom_button.dart';
 import 'package:bookstore/widgets/custom_text_form_field.dart';
 import 'package:bookstore/widgets/top_bar.dart';
@@ -44,13 +46,13 @@ class _SignUpState extends State<SignUp> {
             child: Center(
               child: ListView(
                 children: [
-                  topBar('Register', null),
+                  topBar(S.of(context).Register, null),
                   // const PickImageWidget(),
                   SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                   ),
                   Text(
-                    'Please fill your details to signup.',
+                    S.of(context).Pleasefillyourdetailstosignup,
                     style: TextStyle(
                         fontSize: getResponsiveFontSize(context, fontSize: 18)),
                   ),
@@ -64,7 +66,7 @@ class _SignUpState extends State<SignUp> {
                           controller:
                               context.read<SignUpCubit>().signUpFirstName,
                           obscureText: false,
-                          hintText: 'First Name',
+                          hintText: S.of(context).FirstName,
                           prefixIcon: const Icon(FontAwesomeIcons.user),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -86,7 +88,7 @@ class _SignUpState extends State<SignUp> {
                           controller:
                               context.read<SignUpCubit>().signUpLastName,
                           obscureText: false,
-                          hintText: 'Last Name',
+                          hintText: S.of(context).LastName,
                           prefixIcon: const Icon(FontAwesomeIcons.user),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -107,7 +109,7 @@ class _SignUpState extends State<SignUp> {
                   CustomTextFormField(
                     controller: context.read<SignUpCubit>().signUpUserName,
                     obscureText: false,
-                    hintText: 'Username',
+                    hintText: S.of(context).UserName,
                     prefixIcon: const Icon(FontAwesomeIcons.user),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
@@ -124,7 +126,7 @@ class _SignUpState extends State<SignUp> {
                   CustomTextFormField(
                     controller: context.read<SignUpCubit>().signUpEmail,
                     obscureText: false,
-                    hintText: 'Email',
+                    hintText: S.of(context).Email,
                     prefixIcon: const Icon(Icons.email),
                     validator: (value) {
                       if (!RegExp(
@@ -142,7 +144,7 @@ class _SignUpState extends State<SignUp> {
                   CustomTextFormField(
                     controller: context.read<SignUpCubit>().signUpPassword,
                     obscureText: _isVisible,
-                    hintText: 'Password',
+                    hintText: S.of(context).Password,
                     prefixIcon: const Icon(Icons.lock),
                     suffixIcon: IconButton(
                       onPressed: () => setState(() => _isVisible = !_isVisible),
@@ -170,7 +172,7 @@ class _SignUpState extends State<SignUp> {
                         )
                       : CustomButton(
                           color: Colors.black,
-                          title: 'Register',
+                          title: S.of(context).Register,
                           onTap: () {
                             if (context
                                     .read<SignUpCubit>()
@@ -189,14 +191,19 @@ class _SignUpState extends State<SignUp> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Already a member ? ',
+                        S.of(context).Alreadyhaveanaccount,
                         style: TextStyle(
                             fontSize:
                                 getResponsiveFontSize(context, fontSize: 16)),
                       ),
                       GestureDetector(
                         onTap: () {
-                          Navigator.pop(context);
+                          Navigator.push<void>(
+                            context,
+                            MaterialPageRoute<void>(
+                              builder: (BuildContext context) => const Signin(),
+                            ),
+                          );
                         },
                         child: Text(
                           'SignIn',

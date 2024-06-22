@@ -1,5 +1,6 @@
 import 'package:bookstore/cubits/bottom_navigation_bar/bottom_navigation_bar_cubit.dart';
 import 'package:bookstore/cubits/get_user_info/get_user_info_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/cart.dart';
 import 'package:bookstore/views/categories_view.dart';
@@ -41,7 +42,7 @@ class UserNavigationBar extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.book, color: Colors.black),
-              title: const Text('Your books'),
+              title: Text(S.of(context).yourbooks),
               onTap: () {
                 Navigator.push(
                   context,
@@ -53,7 +54,7 @@ class UserNavigationBar extends StatelessWidget {
             ),
             ListTile(
               leading: const Icon(Icons.favorite, color: Colors.black),
-              title: const Text('Favorites'),
+              title: Text(S.of(context).Favorites),
               onTap: () {
                 Navigator.push(
                   context,
@@ -64,7 +65,7 @@ class UserNavigationBar extends StatelessWidget {
               },
             ),
             ListTile(
-              title: const Text('Settings'),
+              title: Text(S.of(context).Settings),
               leading: const Icon(Icons.settings, color: Colors.black),
               onTap: () {
                 context.read<GetUserInfoCubit>().getUserInfo();
@@ -77,7 +78,7 @@ class UserNavigationBar extends StatelessWidget {
               },
             ),
             ListTile(
-                title: const Text('Log out'),
+                title: Text(S.of(context).Logout),
                 leading: const Icon(Icons.logout, color: Colors.black),
                 onTap: () {
                   CacheNetwork.deleteCacheItem(key: 'token');

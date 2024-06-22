@@ -110,23 +110,27 @@ class BookCard extends StatelessWidget {
                   const SizedBox(
                     height: 5,
                   ),
-                  price != ''
-                      ? Text(
-                          '\$$price',
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize:
-                                getResponsiveFontSize(context, fontSize: 24),
-                            color: Colors.black,
-                          ),
-                        )
-                      : Text(
-                          '',
-                          style: TextStyle(
-                            fontSize:
-                                getResponsiveFontSize(context, fontSize: 24),
-                            color: Colors.black,
-                          ),
+                  price != 'Owned'
+                      ? price != ''
+                          ? Text(
+                              '\$$price',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: getResponsiveFontSize(context,
+                                    fontSize: 24),
+                                color: Colors.black,
+                              ),
+                            )
+                          : Text(
+                              '',
+                              style: TextStyle(
+                                fontSize: getResponsiveFontSize(context,
+                                    fontSize: 24),
+                                color: Colors.black,
+                              ),
+                            )
+                      : const SizedBox(
+                          height: 20,
                         ),
                   const SizedBox(
                     height: 5,

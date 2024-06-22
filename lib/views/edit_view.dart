@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/settings_view.dart';
 import 'package:bookstore/views/user_nav_bar_m.dart';
@@ -75,12 +76,12 @@ class _EditViewState extends State<EditView> {
           child: Center(
             child: ListView(
               children: [
-                topBar('Update Information', null),
+                topBar(S.of(context).UpdateInformation, null),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.05,
                 ),
                 Text(
-                  'Please fill your details to update.',
+                  S.of(context).Pleasefillyour,
                   style: TextStyle(
                     fontSize: getResponsiveFontSize(context, fontSize: 18),
                   ),
@@ -130,7 +131,7 @@ class _EditViewState extends State<EditView> {
                             .read<UpdateUserProfileCubit>()
                             .editFirstName,
                         obscureText: false,
-                        hintText: 'First Name',
+                        hintText: S.of(context).FirstName,
                         prefixIcon: const Icon(FontAwesomeIcons.user),
                         onSaved: (value) {},
                       ),
@@ -143,7 +144,7 @@ class _EditViewState extends State<EditView> {
                         controller:
                             context.read<UpdateUserProfileCubit>().editLastName,
                         obscureText: false,
-                        hintText: 'Last Name',
+                        hintText: S.of(context).LastName,
                         prefixIcon: const Icon(FontAwesomeIcons.user),
                         onSaved: (value) {},
                       ),
@@ -155,7 +156,7 @@ class _EditViewState extends State<EditView> {
                   controller:
                       context.read<UpdateUserProfileCubit>().editUserName,
                   obscureText: false,
-                  hintText: 'Username',
+                  hintText: S.of(context).UserName,
                   prefixIcon: const Icon(FontAwesomeIcons.user),
                   onSaved: (value) {},
                 ),
@@ -167,7 +168,7 @@ class _EditViewState extends State<EditView> {
                       setState(() {
                         Navigator.pushReplacement(
                           context,
-                          MaterialPageRoute( 
+                          MaterialPageRoute(
                             builder: (context) => const UserNavigationBar(),
                           ),
                         );
@@ -185,7 +186,7 @@ class _EditViewState extends State<EditView> {
                             )
                           : CustomButton(
                               color: Colors.black,
-                              title: 'Update',
+                              title: S.of(context).Update,
                               onTap: () async {
                                 if (_pickedImage != null) {
                                   await _uploadImage(_pickedImage!).then(
@@ -197,7 +198,7 @@ class _EditViewState extends State<EditView> {
                     } else {
                       return CustomButton(
                         color: Colors.black,
-                        title: 'Update',
+                        title: S.of(context).Update,
                         onTap: () async {
                           if (_pickedImage != null) {
                             await _uploadImage(_pickedImage!).then((value) =>

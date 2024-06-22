@@ -1,6 +1,7 @@
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.dart';
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/book_card.dart';
 import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +69,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   }
                 },
                 decoration: InputDecoration(
-                  hintText: 'Search',
+                  hintText: S.of(context).Search,
                   hintStyle: const TextStyle(color: Colors.black, fontSize: 20),
                   prefixIcon: const Icon(
                     Icons.search,
@@ -123,9 +124,9 @@ class _SearchScreenState extends State<SearchScreen> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                const Text(
-                                  'No book found ',
-                                  style: TextStyle(
+                                Text(
+                                  S.of(context).Nobookfound,
+                                  style: const TextStyle(
                                       color: Colors.black,
                                       fontSize: 30,
                                       fontWeight: FontWeight.bold),
@@ -209,9 +210,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         const SizedBox(
                           height: 20,
                         ),
-                        const Text(
-                          'Find your book',
-                          style: TextStyle(
+                        Text(
+                          S.of(context).Findyourbook,
+                          style: const TextStyle(
                               color: Colors.black,
                               fontSize: 30,
                               fontWeight: FontWeight.bold),

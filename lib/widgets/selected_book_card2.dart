@@ -2,6 +2,7 @@ import 'package:bookstore/constants.dart';
 import 'package:bookstore/core/repo/checkout_repo_impl.dart';
 import 'package:bookstore/cubits/get_books/get_user_Bookmarks_books/get_books_cubit.dart';
 import 'package:bookstore/cubits/stripe/stripe_payment_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/models/book_id_model.dart';
@@ -158,7 +159,7 @@ class _SelectedBookCard2State extends State<SelectedBookCard2> {
         Align(
           alignment: Alignment.bottomLeft,
           child: Text(
-            'Comments',
+            S.of(context).Comments,
             style: TextStyle(
               fontSize: getResponsiveFontSize(context, fontSize: 20),
               fontWeight: FontWeight.bold,
@@ -268,7 +269,7 @@ class _SelectedBookCard2State extends State<SelectedBookCard2> {
                                   width: width * 0.3,
                                   child: CustomButton(
                                     color: Colors.black,
-                                    title: 'Buy Now',
+                                    title: S.of(context).BuyNow,
                                     onTap: () {
                                       showModalBottomSheet(
                                         context: context,
@@ -299,8 +300,8 @@ class _SelectedBookCard2State extends State<SelectedBookCard2> {
                                   child: CustomButton(
                                     color: Colors.black,
                                     title: iscart
-                                        ? 'Delete from Cart'
-                                        : 'Add to Cart',
+                                        ? S.of(context).DeletefromCart
+                                        : S.of(context).AddtoCart,
                                     onTap: () async {
                                       setState(() {
                                         ischange = true;
@@ -331,7 +332,7 @@ class _SelectedBookCard2State extends State<SelectedBookCard2> {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    'Comments',
+                    S.of(context).Comments,
                     style: TextStyle(
                       fontSize: getResponsiveFontSize(context, fontSize: 20),
                       fontWeight: FontWeight.bold,

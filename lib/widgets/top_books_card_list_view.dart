@@ -1,5 +1,6 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_topseller%20-books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/book_card.dart';
 import 'package:bookstore/widgets/custom_loading_small_card.dart';
 import 'package:bookstore/widgets/see_all/see_all_top_books.dart';
@@ -28,7 +29,7 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
         Row(
           children: [
             Text(
-              'Best Seller',
+              S.of(context).BestSeller,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -48,7 +49,7 @@ class _TopBookCardListViewState extends State<TopBookCardListView> {
               child: Row(
                 children: [
                   Text(
-                    'See All',
+                    S.of(context).SeeAll,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: getResponsiveFontSize(context, fontSize: 20),

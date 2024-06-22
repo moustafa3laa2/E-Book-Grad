@@ -1,3 +1,4 @@
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/helper/api.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/views/selected_book_view.dart';
@@ -22,7 +23,7 @@ class AddCommentForRating extends StatelessWidget {
         child: CustomTextFormField(
           controller: addCommentController,
           obscureText: false,
-          hintText: 'Add Comment ...',
+          hintText: S.of(context).AddComment,
           suffixIcon: IconButton(
             onPressed: () {
               showDialog(
@@ -65,7 +66,7 @@ class _RateBookDialogState extends State<RateBookDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: const Center(child: Text("Rate this Book ..")),
+      title:  Center(child: Text(S.of(context).RatethisBook)),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -113,9 +114,9 @@ class _RateBookDialogState extends State<RateBookDialog> {
               ? const CircularProgressIndicator(
                   color: Colors.black,
                 )
-              : const Text(
-                  "ok",
-                  style: TextStyle(fontSize: 20),
+              :  Text(
+                  S.of(context).ok,
+                  style: const TextStyle(fontSize: 20),
                 ),
         )
       ],

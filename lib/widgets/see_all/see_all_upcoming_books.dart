@@ -1,5 +1,6 @@
 import 'package:bookstore/core/errors/errorbooks.dart';
 import 'package:bookstore/cubits/get_books/get_upcoming_books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/custom_loading_big_card.dart';
 import 'package:bookstore/widgets/searchcardofbbok.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,9 @@ class _SeeAllUpcomingBooksState extends State<SeeAllUpcomingBooks> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Upcoming Books',
-          style: TextStyle(fontWeight: FontWeight.bold),
+        title: Text(
+          S.of(context).ComingSoon,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         centerTitle: true,
       ),

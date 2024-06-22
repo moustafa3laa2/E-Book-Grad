@@ -1,5 +1,6 @@
 import 'package:bookstore/constants.dart';
 import 'package:bookstore/cubits/get_books/get_books/get_books_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/book_card.dart';
 import 'package:bookstore/widgets/custom_loading_small_card.dart';
 import 'package:bookstore/widgets/see_all/see_all_book.dart';
@@ -28,7 +29,7 @@ class _AllBooksViewState extends State<AllBooksView> {
         Row(
           children: [
             Text(
-              'All Books',
+              S.of(context).AllBooks,
               style: TextStyle(
                 fontWeight: FontWeight.w600,
                 fontSize: getResponsiveFontSize(context, fontSize: 28),
@@ -46,7 +47,7 @@ class _AllBooksViewState extends State<AllBooksView> {
               child: Row(
                 children: [
                   Text(
-                    'See All',
+                    S.of(context).SeeAll,
                     style: TextStyle(
                       fontWeight: FontWeight.w500,
                       fontSize: getResponsiveFontSize(context, fontSize: 20),

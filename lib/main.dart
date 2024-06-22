@@ -18,12 +18,15 @@ import 'package:bookstore/cubits/get_user_info/get_user_info_cubit.dart';
 import 'package:bookstore/cubits/sign_in/sign_in_cubit.dart';
 import 'package:bookstore/cubits/sign_up/sign_up_cubit.dart';
 import 'package:bookstore/cubits/update_user_profile/update_user_profile_cubit.dart';
+import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/helper/local_network.dart';
 import 'package:bookstore/simple_bloc_observer.dart';
 import 'package:bookstore/views/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:intl/intl.dart';
 
 void main() async {
   Stripe.publishableKey = ApiKeys.publishablekey;
@@ -34,11 +37,45 @@ void main() async {
   await CacheNetwork.cacheInitialization();
   Bloc.observer = SimpleBlocObserver();
 
-  runApp(const BookStore());
+  CacheHelper cacheHelper = getIt<CacheHelper>();
+  String? savedLocale = cacheHelper.getLocale();
+  Locale initialLocale =
+      savedLocale != null ? Locale(savedLocale) : const Locale('en', 'US');
+
+  runApp(BookStore(initialLocale: initialLocale));
 }
 
-class BookStore extends StatelessWidget {
-  const BookStore({super.key});
+class BookStore extends StatefulWidget {
+  final Locale initialLocale;
+
+  const BookStore({super.key, required this.initialLocale});
+
+  static void setLocale(BuildContext context, Locale newLocale) {
+    _BookStoreState state = context.findAncestorStateOfType<_BookStoreState>()!;
+    state.setLocale(newLocale);
+  }
+
+  @override
+  State<BookStore> createState() => _BookStoreState();
+}
+
+class _BookStoreState extends State<BookStore> {
+  late Locale _locale;
+  late CacheHelper cacheHelper;
+
+  @override
+  void initState() {
+    super.initState();
+    _locale = widget.initialLocale;
+    cacheHelper = getIt<CacheHelper>();
+  }
+
+  void setLocale(Locale locale) {
+    setState(() {
+      _locale = locale;
+      cacheHelper.saveLocale(locale.languageCode); // Save the selected locale
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,6 +134,14 @@ class BookStore extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
+        locale: _locale,
+        localizationsDelegates: const [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
         theme: ThemeData(
           fontFamily: 'Rubik-Italic',
         ),
