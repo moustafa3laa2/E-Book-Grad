@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/helper/local_network.dart';
-import 'package:bookstore/views/settings_view.dart';
 import 'package:bookstore/views/user_nav_bar_m.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

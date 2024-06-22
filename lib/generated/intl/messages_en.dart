@@ -97,6 +97,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "Time": MessageLookupByLibrary.simpleMessage("Time:"),
         "Total": MessageLookupByLibrary.simpleMessage("Total"),
         "Totall": MessageLookupByLibrary.simpleMessage("Total:"),
+        "Typeyourmessage":
+            MessageLookupByLibrary.simpleMessage("Type your message"),
         "Update": MessageLookupByLibrary.simpleMessage("Update"),
         "UpdateInformation":
             MessageLookupByLibrary.simpleMessage("Update Information"),
