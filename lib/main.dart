@@ -26,7 +26,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
-import 'package:intl/intl.dart';
 
 void main() async {
   Stripe.publishableKey = ApiKeys.publishablekey;

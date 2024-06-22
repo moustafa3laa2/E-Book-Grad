@@ -17,6 +17,12 @@ class ChatView extends StatefulWidget {
 }
 
 class _ChatViewState extends State<ChatView> {
+  @override
+  void initState() {
+    super.initState();
+    context.read<GetUserInfoCubit>().getUserInfo();
+  }
+
   final List<Map<String, String>> _messages = [];
   final TextEditingController _controller = TextEditingController();
   bool _isLoading = false;
