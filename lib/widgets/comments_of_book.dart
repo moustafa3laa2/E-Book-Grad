@@ -45,39 +45,25 @@ class _CommentsOfBookState extends State<CommentsOfBook> {
               child: ListView.builder(
                 itemCount: widget.reviews.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Column(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(
-                            left: MediaQuery.of(context).size.width * 0.06),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              '${reviews[index].user!.firstname} ${reviews[index].user!.lastname}',
-                              style: TextStyle(
-                                  fontSize: getResponsiveFontSize(context,
-                                      fontSize: 20),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            RatingBarWidget(
-                              rating: reviews[index].rating.toDouble(),
-                              size: 20,
-                            ),
-                          ],
-                        ),
+                  return ListTile(
+                    trailing: RatingBarWidget(
+                      rating: reviews[index].rating.toDouble(),
+                      size: 20,
+                    ),
+                    leading: Image.asset('assets/images/accountpic.png'),
+                    title: Text(
+                      '${reviews[index].user!.firstname} ${reviews[index].user!.lastname}',
+                      style: TextStyle(
+                          fontSize:
+                              getResponsiveFontSize(context, fontSize: 20),
+                          fontWeight: FontWeight.bold),
+                    ),
+                    subtitle: Text(
+                      reviews[index].comment.toString(),
+                      style: TextStyle(
+                        fontSize: getResponsiveFontSize(context, fontSize: 16),
                       ),
-                      ListTile(
-                        leading: Image.asset('assets/images/accountpic.png'),
-                        title: Text(
-                          reviews[index].comment.toString(),
-                          style: TextStyle(
-                            fontSize:
-                                getResponsiveFontSize(context, fontSize: 16),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
                   );
                 },
               ),

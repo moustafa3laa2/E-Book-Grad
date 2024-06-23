@@ -3,7 +3,7 @@ import 'package:bookstore/cubits/get_books/get_user_own__books/get_books_cubit.d
 import 'package:bookstore/cubits/get_books/search_books/get_books_cubit.dart';
 import 'package:bookstore/generated/l10n.dart';
 import 'package:bookstore/widgets/book_card.dart';
-import 'package:bookstore/widgets/custom_loading_big_card.dart';
+import 'package:bookstore/widgets/custom_loading_small_card_grid_view_static.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
@@ -102,7 +102,7 @@ class _SearchScreenState extends State<SearchScreen> {
                   ? BlocBuilder<GetsearchBooksCubit, GetSearchState>(
                       builder: (context, state) {
                       if (state is GetSearchBooksLoading) {
-                        return const CustomLoadingBigCard();
+                        return const CustomLoadingSmallCardGridViewStatic();
                       } else if (state is GetSearchBooksSuccess) {
                         if (state.books.isEmpty) {
                           return Center(
