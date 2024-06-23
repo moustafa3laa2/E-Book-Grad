@@ -142,7 +142,7 @@ class _BookStoreState extends State<BookStore> {
         ],
         supportedLocales: S.delegate.supportedLocales,
         theme: ThemeData(
-          fontFamily: 'Rubik-Italic',
+          fontFamily: 'Rubik-Variable',
         ),
         debugShowCheckedModeBanner: false,
         home: const SplashScreen(),

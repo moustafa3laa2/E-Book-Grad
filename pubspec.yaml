@@ -100,9 +100,9 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Rubik-Italic
+    - family: Rubik-Variable
       fonts:
-        - asset: assets/fonts/Rubik-Italic-VariableFont_wght.ttf
+        - asset: assets/fonts/Rubik-VariableFont_wght.ttf
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
 flutter_intl:
