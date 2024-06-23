@@ -113,7 +113,8 @@ class _UserBooksState extends State<UserBooks> {
                                           OpenBook(
                                         bookurl: state
                                             .books.books![index].pdf!.url
-                                            .toString(),
+                                            .toString(), 
+                                        bookname: state.books.books![index].title!
                                       ),
                                     ));
                               },

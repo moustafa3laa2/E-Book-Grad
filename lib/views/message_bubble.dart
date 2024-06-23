@@ -54,7 +54,7 @@ class MessageBubble extends StatelessWidget {
               backgroundImage: NetworkImage(
                 userImage!,
               ),
-              backgroundColor: theme.colorScheme.primary.withAlpha(180),
+              backgroundColor: Colors.white,
               radius: 23,
             ),
           ),

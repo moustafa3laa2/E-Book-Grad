@@ -50,7 +50,14 @@ class _CommentsOfBookState extends State<CommentsOfBook> {
                       rating: reviews[index].rating.toDouble(),
                       size: 20,
                     ),
-                    leading: Image.asset('assets/images/accountpic.png'),
+                    leading: Image.network(
+                      reviews[index].user!.image != null
+                          ? reviews[index].user!.image!.url!
+                          : "https://res.cloudinary.com/ddtp8tqvv/image/upload/v1719154689/Users/vywcodnzuyauao7g0ek4.png",
+                      width: 50,
+                      height: 50,
+                      fit: BoxFit.cover,
+                    ),
                     title: Text(
                       '${reviews[index].user!.firstname} ${reviews[index].user!.lastname}',
                       style: TextStyle(
