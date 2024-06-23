@@ -59,10 +59,16 @@ class _EditViewState extends State<EditView> {
     if (pickedImage != null) {
       setState(() {
         _pickedImage = File(pickedImage.path);
-
         isInit = true;
       });
     }
+  }
+
+  void _clearTextFields() {
+    context.read<UpdateUserProfileCubit>().editFirstName.clear();
+    context.read<UpdateUserProfileCubit>().editLastName.clear();
+    context.read<UpdateUserProfileCubit>().editUserName.clear();
+    context.read<UpdateUserProfileCubit>().editEmail.clear();
   }
 
   @override
@@ -164,6 +170,7 @@ class _EditViewState extends State<EditView> {
                 BlocConsumer<UpdateUserProfileCubit, UpdateUserProfileState>(
                   listener: (context, state) {
                     if (state is UpdateUserProfileSuccess) {
+                      _clearTextFields();
                       setState(() {
                         Navigator.pushReplacement(
                           context,
@@ -192,6 +199,10 @@ class _EditViewState extends State<EditView> {
                                       (value) => context
                                           .read<UpdateUserProfileCubit>()
                                           .updateUserProfile());
+                                } else {
+                                  context
+                                      .read<UpdateUserProfileCubit>()
+                                      .updateUserProfile();
                                 }
                               });
                     } else {
@@ -204,6 +215,10 @@ class _EditViewState extends State<EditView> {
                                 context
                                     .read<UpdateUserProfileCubit>()
                                     .updateUserProfile());
+                          } else {
+                            context
+                                .read<UpdateUserProfileCubit>()
+                                .updateUserProfile();
                           }
                         },
                       );
