@@ -55,7 +55,7 @@ class _CommentsOfBookState extends State<CommentsOfBook> {
                       '${reviews[index].user!.firstname} ${reviews[index].user!.lastname}',
                       style: TextStyle(
                           fontSize:
-                              getResponsiveFontSize(context, fontSize: 20),
+                              getResponsiveFontSize(context, fontSize: 16),
                           fontWeight: FontWeight.bold),
                     ),
                     subtitle: Text(

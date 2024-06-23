@@ -18,6 +18,7 @@ class Signin extends StatefulWidget {
 
 class _SigninState extends State<Signin> {
   bool _isVisible = true;
+
   @override
   void initState() {
     super.initState();
@@ -87,11 +88,9 @@ class _SigninState extends State<Signin> {
                   onSaved: (value) {},
                 ),
                 const SizedBox(height: 30),
-                const SizedBox(height: 30),
                 BlocConsumer<SignInCubit, SignInState>(
                   listener: (context, state) {
                     if (state is SignInSuccess) {
-                      // Navigate to the next screen when sign-in is successful
                       Navigator.pushReplacement(
                         context,
                         MaterialPageRoute<void>(
@@ -99,25 +98,16 @@ class _SigninState extends State<Signin> {
                               const UserNavigationBar(),
                         ),
                       );
+                    } else if (state is SignInFailure) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text("Invalid Email Or Password!"),
+                        ),
+                      );
                     }
                   },
                   builder: (context, state) {
-                    if (state is SignInInitial) {
-                      return CustomButton(
-                        color: Colors.black,
-                        title: S.of(context).GetStarted,
-                        onTap: () {
-                          if (context
-                                  .read<SignInCubit>()
-                                  .signInFormKey
-                                  .currentState
-                                  ?.validate() ==
-                              true) {
-                            context.read<SignInCubit>().signIn();
-                          }
-                        },
-                      );
-                    } else if (state is SignInLoading) {
+                    if (state is SignInLoading) {
                       return const Center(
                         child: CircularProgressIndicator(
                           color: Colors.black,
