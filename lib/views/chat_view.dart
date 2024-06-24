@@ -39,7 +39,7 @@ class _ChatViewState extends State<ChatView> {
     final url = Uri.parse('https://api.dify.ai/v1/chat-messages');
     final headers = {
       'Content-Type': 'application/json',
-      'Authorization': 'Bearer app-OFJhfaQtuL6jeW05eJXy1EOI',
+      'Authorization': 'Bearer app-ENCdd21jMNTk3dS8miDnXY44',
     };
     final body = jsonEncode({
       'inputs': {},
