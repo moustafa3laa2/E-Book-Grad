@@ -105,12 +105,21 @@ class MessageLookup extends MessageLookupByLibrary {
         "UserName": MessageLookupByLibrary.simpleMessage("User Name"),
         "Yourcartisempty":
             MessageLookupByLibrary.simpleMessage("Your cart is empty"),
+        "filterby": MessageLookupByLibrary.simpleMessage("filter by"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "ok": MessageLookupByLibrary.simpleMessage("ok"),
         "pay": MessageLookupByLibrary.simpleMessage("Pay"),
         "readmorethan": MessageLookupByLibrary.simpleMessage(
             "Read more and stress less with our online book shopping app. Shop from anywhere you are and discover titles that you love. Happy reading!"),
         "skip": MessageLookupByLibrary.simpleMessage("skip"),
+        "sortbyhighestprice":
+            MessageLookupByLibrary.simpleMessage("sort by highest price"),
+        "sortbylowestprice":
+            MessageLookupByLibrary.simpleMessage("sort by lowest price"),
+        "sortbynewestbooks":
+            MessageLookupByLibrary.simpleMessage("sort by newest books"),
+        "sortbyoldestbooks":
+            MessageLookupByLibrary.simpleMessage("sort by oldest books"),
         "yourbooks": MessageLookupByLibrary.simpleMessage("Your books ")
       };
 }

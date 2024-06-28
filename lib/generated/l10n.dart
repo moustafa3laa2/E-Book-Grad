@@ -749,6 +749,56 @@ class S {
       args: [],
     );
   }
+
+  /// `filter by`
+  String get filterby {
+    return Intl.message(
+      'filter by',
+      name: 'filterby',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sort by highest price`
+  String get sortbyhighestprice {
+    return Intl.message(
+      'sort by highest price',
+      name: 'sortbyhighestprice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sort by lowest price`
+  String get sortbylowestprice {
+    return Intl.message(
+      'sort by lowest price',
+      name: 'sortbylowestprice',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sort by oldest books`
+  String get sortbyoldestbooks {
+    return Intl.message(
+      'sort by oldest books',
+      name: 'sortbyoldestbooks',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `sort by newest books`
+  String get sortbynewestbooks {
+    return Intl.message(
+      'sort by newest books',
+      name: 'sortbynewestbooks',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

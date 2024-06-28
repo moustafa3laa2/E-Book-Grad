@@ -99,12 +99,21 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("تحديث المعلومات"),
         "UserName": MessageLookupByLibrary.simpleMessage("اسم المستخدم"),
         "Yourcartisempty": MessageLookupByLibrary.simpleMessage("عربتك فارغة"),
+        "filterby": MessageLookupByLibrary.simpleMessage("تصفية حسب"),
         "language": MessageLookupByLibrary.simpleMessage("اللغة"),
         "ok": MessageLookupByLibrary.simpleMessage("ارسال"),
         "pay": MessageLookupByLibrary.simpleMessage("دفع"),
         "readmorethan": MessageLookupByLibrary.simpleMessage(
             "اقرأ أكثر واضغط أقل مع تطبيقنا للتسوق عبر الإنترنت. تسوق من أي مكان واكتشف عناوين تحبها. قراءة سعيدة!"),
         "skip": MessageLookupByLibrary.simpleMessage("تخطى"),
+        "sortbyhighestprice":
+            MessageLookupByLibrary.simpleMessage("ترتيب حسب أعلى سعر"),
+        "sortbylowestprice":
+            MessageLookupByLibrary.simpleMessage("ترتيب حسب أقل سعر"),
+        "sortbynewestbooks":
+            MessageLookupByLibrary.simpleMessage("ترتيب حسب أحدث الكتب"),
+        "sortbyoldestbooks":
+            MessageLookupByLibrary.simpleMessage("ترتيب حسب أقدم الكتب"),
         "yourbooks": MessageLookupByLibrary.simpleMessage("كتبك")
       };
 }

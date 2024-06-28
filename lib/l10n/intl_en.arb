@@ -68,7 +68,12 @@
     "Totall":"Total:",
     "PAID":"PAID",
     "OFF":"OFF",
-    "Typeyourmessage":"Type your message"
+    "Typeyourmessage":"Type your message",
+    "filterby":"filter by",
+    "sortbyhighestprice":"sort by highest price",
+    "sortbylowestprice":"sort by lowest price",
+    "sortbyoldestbooks":"sort by oldest books",
+    "sortbynewestbooks":"sort by newest books"
 
     
 

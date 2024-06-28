@@ -68,5 +68,10 @@
     "Totall":"الإجمالي:",
     "PAID":"تم الدفع",
     "OFF":"خصم",
-    "Typeyourmessage":"اكتب رسالتك"
+    "Typeyourmessage":"اكتب رسالتك",
+    "filterby":"تصفية حسب",
+    "sortbyhighestprice":"ترتيب حسب أعلى سعر",
+    "sortbylowestprice":"ترتيب حسب أقل سعر",
+    "sortbyoldestbooks":"ترتيب حسب أقدم الكتب",
+    "sortbynewestbooks":"ترتيب حسب أحدث الكتب"
 }

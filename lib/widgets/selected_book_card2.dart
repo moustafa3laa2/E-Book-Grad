@@ -29,7 +29,8 @@ class SelectedBookCard2 extends StatefulWidget {
       required this.bookid,
       required this.rating,
       required this.reviews,
-      required this.isOwned});
+      required this.isOwned,
+      required this.publishDate});
 
   final String autherName;
   final String bookid;
@@ -41,6 +42,7 @@ class SelectedBookCard2 extends StatefulWidget {
   final double rating;
   final List<Review> reviews;
   final bool isOwned;
+  final DateTime publishDate;
 
   @override
   State<SelectedBookCard2> createState() => _SelectedBookCard2State();
@@ -141,6 +143,14 @@ class _SelectedBookCard2State extends State<SelectedBookCard2> {
                       ),
                     ),
                     SizedBox(height: hight * 0.01),
+                    Text(
+                      'Published: ${widget.publishDate.day}/${widget.publishDate.month}/${widget.publishDate.year}',
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: getResponsiveFontSize(context, fontSize: 30),
+                      ),
+                    ),
+                    SizedBox(height: hight * 0.01),
                     RatingBarWidget(
                       rating: widget.rating,
                       size: 45,
@@ -234,6 +244,15 @@ class _SelectedBookCard2State extends State<SelectedBookCard2> {
                                     fontSize: 30),
                               ),
                             ),
+                            Text(
+                              'Published: ${widget.publishDate.day}/${widget.publishDate.month}/${widget.publishDate.year}',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w400,
+                                fontSize: getResponsiveFontSize(context,
+                                    fontSize: 30),
+                              ),
+                            ),
+                            SizedBox(height: hight * 0.01),
                             SizedBox(height: hight * 0.01),
                             RatingBarWidget(
                               rating: widget.rating,

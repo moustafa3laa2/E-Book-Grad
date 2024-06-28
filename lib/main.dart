@@ -72,7 +72,7 @@ class _BookStoreState extends State<BookStore> {
   void setLocale(Locale locale) {
     setState(() {
       _locale = locale;
-      cacheHelper.saveLocale(locale.languageCode); // Save the selected locale
+      cacheHelper.saveLocale(locale.languageCode);
     });
   }
 

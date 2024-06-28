@@ -166,6 +166,7 @@ class _SelectedBookViewState extends State<SelectedBookView> {
                         rating: state.books.book!.averageRating!.toDouble(),
                         reviews: state.books.book!.reviews,
                         isOwned: isOwned,
+                        publishDate: state.books.book!.publishDate!,
                       );
                     } else if (state is GetBookidFailure) {
                       return const Center(child: Text('Error'));

@@ -18,6 +18,8 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   bool isempty = true;
   bool ownershipCheckComplete = false;
+  String filter = '';
+  String search = '';
 
   final Map<String, bool> ownedBooks = {};
   void checkIfOwned(String bookId) {
@@ -55,45 +57,179 @@ class _SearchScreenState extends State<SearchScreen> {
               const SizedBox(
                 height: 20,
               ),
-              TextFormField(
-                onChanged: (value) {
-                  if (value.isNotEmpty) {
-                    setState(() {
-                      isempty = false;
-                    });
-                    context.read<GetsearchBooksCubit>().getsearchbooks(value);
-                  } else {
-                    setState(() {
-                      isempty = true;
-                    });
-                  }
-                },
-                decoration: InputDecoration(
-                  hintText: S.of(context).Search,
-                  hintStyle: const TextStyle(color: Colors.black, fontSize: 20),
-                  prefixIcon: const Icon(
-                    Icons.search,
-                    color: Colors.black,
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      onChanged: (value) {
+                        if (value.isNotEmpty) {
+                          setState(() {
+                            isempty = false;
+                            search = value;
+                          });
+                          context
+                              .read<GetsearchBooksCubit>()
+                              .getsearchbooks(value, filter);
+                        } else {
+                          setState(() {
+                            isempty = true;
+                          });
+                        }
+                      },
+                      decoration: InputDecoration(
+                        hintText: S.of(context).Search,
+                        hintStyle:
+                            const TextStyle(color: Colors.black, fontSize: 20),
+                        prefixIcon: const Icon(
+                          Icons.search,
+                          color: Colors.black,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                          ),
+                        ),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(20),
+                          borderSide: const BorderSide(
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
                     ),
                   ),
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet(
+                          context: context,
+                          builder: (context) {
+                            return Column(children: [
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              Text(
+                                S.of(context).filterby,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                              ListTile(
+                                  title: Text(
+                                    S.of(context).AllBooks,
+                                    style: const TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 20,
+                                    ),
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      isempty = false;
+                                      Navigator.pop(context);
+                                      context
+                                          .read<GetsearchBooksCubit>()
+                                          .getsearchbooks(search, filter);
+                                    });
+                                  }),
+                              ListTile(
+                                title: Text(
+                                  S.of(context).sortbyhighestprice,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.pop(context);
+
+                                  context
+                                      .read<GetsearchBooksCubit>()
+                                      .getsearchbooks(search, "-price");
+                                  setState(() {
+                                    filter = "-price";
+                                    isempty = false;
+                                  });
+                                },
+                              ),
+                              ListTile(
+                                title: Text(
+                                  S.of(context).sortbylowestprice,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  context
+                                      .read<GetsearchBooksCubit>()
+                                      .getsearchbooks(search, 'price');
+                                  setState(() {
+                                    filter = "price";
+                                    isempty = false;
+                                  });
+                                },
+                              ),
+                              ListTile(
+                                title: Text(
+                                  S.of(context).sortbyoldestbooks,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  context
+                                      .read<GetsearchBooksCubit>()
+                                      .getsearchbooks(search, 'publishDate');
+                                  setState(() {
+                                    filter = "publishDate";
+                                    isempty = false;
+                                  });
+                                },
+                              ),
+                              ListTile(
+                                title: Text(
+                                  S.of(context).sortbynewestbooks,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 20,
+                                  ),
+                                ),
+                                onTap: () {
+                                  Navigator.pop(context);
+                                  context
+                                      .read<GetsearchBooksCubit>()
+                                      .getsearchbooks(search, '-publishDate');
+                                  setState(() {
+                                    filter = "-publishDate";
+                                    isempty = false;
+                                  });
+                                },
+                              ),
+                              const SizedBox(
+                                height: 20,
+                              ),
+                            ]);
+                          });
+                    },
+                    icon: const Icon(
+                      Icons.filter_alt,
                       color: Colors.black,
                     ),
-                  ),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(20),
-                    borderSide: const BorderSide(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
+                  )
+                ],
               ),
               const SizedBox(
                 height: 20,
