@@ -340,10 +340,10 @@ class S {
     );
   }
 
-  /// `Your books `
+  /// `My Books `
   String get yourbooks {
     return Intl.message(
-      'Your books ',
+      'My Books ',
       name: 'yourbooks',
       desc: '',
       args: [],

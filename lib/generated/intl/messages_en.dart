@@ -120,6 +120,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("sort by newest books"),
         "sortbyoldestbooks":
             MessageLookupByLibrary.simpleMessage("sort by oldest books"),
-        "yourbooks": MessageLookupByLibrary.simpleMessage("Your books ")
+        "yourbooks": MessageLookupByLibrary.simpleMessage("My Books ")
       };
 }

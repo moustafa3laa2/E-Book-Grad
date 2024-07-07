@@ -114,6 +114,6 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("ترتيب حسب أحدث الكتب"),
         "sortbyoldestbooks":
             MessageLookupByLibrary.simpleMessage("ترتيب حسب أقدم الكتب"),
-        "yourbooks": MessageLookupByLibrary.simpleMessage("كتبك")
+        "yourbooks": MessageLookupByLibrary.simpleMessage("كتبي")
       };
 }
